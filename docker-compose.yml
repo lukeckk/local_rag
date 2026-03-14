@@ -1,41 +1,31 @@
-services:
+name: doc_rag
 
-  crawler:
-    build:
-      context: ./crawler
-      dockerfile: Dockerfile
-    container_name: sg_crawler
-    shm_size: "1gb"
-    environment:
-      - OUTPUT_DIR=/data/raw_markdown
-    volumes:
-      - ./data/raw_markdown:/data/raw_markdown
-    restart: unless-stopped
+services:
 
   qdrant:
     image: qdrant/qdrant:latest
-    container_name: sg_qdrant
+    container_name: doc_qdrant
     ports:
-      - "6333:6333"
-      - "6334:6334"
+      - "6335:6333"
+      - "6336:6334"
     volumes:
-      - qdrant_storage:/qdrant/storage
+      - doc_qdrant_storage:/qdrant/storage
     restart: unless-stopped
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: sg_backend
+    container_name: doc_backend
     ports:
-      - "8000:8000"
+      - "8001:8000"
     environment:
       - QDRANT_HOST=qdrant
       - QDRANT_PORT=6333
       - OLLAMA_HOST=host.docker.internal
       - OLLAMA_PORT=11434
       - OLLAMA_MODEL=llama3.2:3b
-      - EMBED_MODEL=nomic-embed-text
+      - EMBED_MODEL=all-MiniLM-L6-v2
     depends_on:
       - qdrant
     volumes:
@@ -46,9 +36,9 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: sg_frontend
+    container_name: doc_frontend
     ports:
-      - "8501:8501"
+      - "8502:8501"
     environment:
       - BACKEND_URL=http://backend:8000
     depends_on:
@@ -58,4 +48,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  qdrant_storage:
+  doc_qdrant_storage:
