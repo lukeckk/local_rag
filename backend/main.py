@@ -6,7 +6,7 @@ from fastapi import FastAPI, HTTPException, UploadFile, File
 from pydantic import BaseModel
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
-from qdrant_client.models import Filter, FieldCondition, MatchText
+from qdrant_client.models import Filter, FieldCondition, MatchText, MatchValue
 import shutil
 from pathlib import Path
 
@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 TOP_K = 5
 OLLAMA_TIMEOUT = 120.0
-MIN_VECTOR_SCORE = 0.35
+MIN_VECTOR_SCORE = 0.18
 
 # Global state
 _state: dict[str, Any] = {}
@@ -74,6 +74,11 @@ class QueryResponse(BaseModel):
     answer: str
     sources: list[SourceDoc]
 
+
+class DocumentSummary(BaseModel):
+    filename: str
+    chunks: int
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -111,6 +116,33 @@ def _keyword_search(query: str, limit: int) -> list[dict]:
     return [
         {"id": r.id, "score": 0.0, "payload": r.payload}
         for r in results[0]
+    ]
+
+
+def _list_documents() -> list[DocumentSummary]:
+    counts: dict[str, int] = {}
+    offset = None
+
+    while True:
+        points, next_offset = _state["qdrant"].scroll(
+            collection_name=COLLECTION_NAME,
+            limit=256,
+            offset=offset,
+            with_payload=True,
+            with_vectors=False,
+        )
+        for point in points:
+            payload = point.payload or {}
+            filename = payload.get("filename") or payload.get("source_url") or "unknown"
+            counts[str(filename)] = counts.get(str(filename), 0) + 1
+
+        if next_offset is None:
+            break
+        offset = next_offset
+
+    return [
+        DocumentSummary(filename=name, chunks=count)
+        for name, count in sorted(counts.items())
     ]
 
 def _reciprocal_rank_fusion(
@@ -167,6 +199,20 @@ def _should_skip_retrieval(question: str) -> bool:
     return len(words) <= 2 and not normalized.endswith("?")
 
 
+def _is_profile_query(question: str) -> bool:
+    normalized = question.strip().lower()
+    profile_phrases = (
+        "who am i",
+        "about me",
+        "my resume",
+        "my cv",
+        "my background",
+        "my experience",
+        "summarize me",
+    )
+    return any(phrase in normalized for phrase in profile_phrases)
+
+
 async def _call_ollama(prompt: str, system_prompt: str | None = None) -> str:
     url = f"http://{OLLAMA_HOST}:{OLLAMA_PORT}/api/generate"
     payload = {
@@ -188,6 +234,23 @@ async def _call_ollama(prompt: str, system_prompt: str | None = None) -> str:
 def health():
     return {"status": "ok", "model": OLLAMA_MODEL, "collection": COLLECTION_NAME}
 
+
+@app.get("/documents", response_model=list[DocumentSummary])
+def list_documents():
+    return _list_documents()
+
+
+@app.delete("/documents/{filename}")
+def delete_document(filename: str):
+    _state["qdrant"].delete(
+        collection_name=COLLECTION_NAME,
+        points_selector=Filter(
+            must=[FieldCondition(key="filename", match=MatchValue(value=filename))]
+        ),
+        wait=True,
+    )
+    return {"status": "success", "filename": filename}
+
 @app.post("/query", response_model=QueryResponse)
 async def query(req: QueryRequest):
     if not req.question.strip():
@@ -207,12 +270,16 @@ async def query(req: QueryRequest):
     logger.info(f"Retrieved {len(fused)} chunks after fusion")
 
     top_vector_score = vector_hits[0]["score"] if vector_hits else 0.0
-    has_relevant_context = bool(fused) and top_vector_score >= MIN_VECTOR_SCORE
+    has_relevant_context = bool(fused) and (
+        top_vector_score >= MIN_VECTOR_SCORE or _is_profile_query(req.question)
+    )
 
     prompt_context = fused if has_relevant_context else []
     prompt = _build_prompt(req.question, prompt_context)
     system_prompt = (
-        "You are a document assistant. Prefer provided context, be accurate, and cite sources when using it."
+        "You are a document assistant. You DO have access to the provided CONTEXT block. "
+        "Never say you cannot access files when context is present. Prefer the provided context, "
+        "be accurate, and cite sources when using it."
         if has_relevant_context
         else "You are a friendly conversational assistant. Reply naturally to greetings and normal chat."
     )

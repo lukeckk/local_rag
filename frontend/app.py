@@ -3,6 +3,7 @@ SG-ComplianceGuard — Streamlit Frontend
 """
 
 import os
+from urllib.parse import quote
 import httpx
 import streamlit as st
 
@@ -32,8 +33,6 @@ st.divider()
 # ---------------------------------------------------------------------------
 if "history" not in st.session_state:
     st.session_state.history = []
-if "current_question" not in st.session_state:
-    st.session_state.current_question = ""
 
 # ---------------------------------------------------------------------------
 # Sidebar — File Upload
@@ -61,6 +60,34 @@ with st.sidebar:
                         st.error(f"Error indexing {uploaded_file.name}: {e}")
 
     st.divider()
+    st.header("🗂 Indexed Files")
+    try:
+        docs_resp = httpx.get(f"{BACKEND_URL}/documents", timeout=20.0)
+        docs_resp.raise_for_status()
+        indexed_docs = docs_resp.json()
+    except Exception as e:
+        indexed_docs = []
+        st.caption(f"Could not load indexed files: {e}")
+
+    if not indexed_docs:
+        st.caption("No files indexed yet.")
+    else:
+        for doc in indexed_docs:
+            col_name, col_action = st.columns([4, 1])
+            with col_name:
+                st.caption(f"`{doc['filename']}` ({doc['chunks']} chunks)")
+            with col_action:
+                if st.button("🗑", key=f"del_{doc['filename']}", help="Delete file from vector store"):
+                    try:
+                        encoded = quote(doc["filename"], safe="")
+                        del_resp = httpx.delete(f"{BACKEND_URL}/documents/{encoded}", timeout=20.0)
+                        del_resp.raise_for_status()
+                        st.success(f"Deleted {doc['filename']}")
+                        st.rerun()
+                    except Exception as e:
+                        st.error(f"Delete failed: {e}")
+
+    st.divider()
     st.markdown("**Stack**")
     st.markdown(
         "- 🔍 Qdrant (vector DB)\n"
@@ -69,32 +96,40 @@ with st.sidebar:
         "- ⚡ FastAPI backend\n"
         "- 🔒 100% local — PDPA compliant"
     )
-
-# ---------------------------------------------------------------------------
-# Query input
-# ---------------------------------------------------------------------------
-question = st.text_input(
-    "Ask a question about your documents:",
-    value=st.session_state.current_question,
-    placeholder="e.g. What is the summary of the financial report?",
-    key="question_input",
-)
-
-ask_col, clear_col = st.columns([1, 5])
-with ask_col:
-    ask_clicked = st.button("Ask", type="primary", use_container_width=True)
-with clear_col:
-    if st.button("Clear history", use_container_width=False):
+    st.divider()
+    if st.button("Clear chat history", use_container_width=True):
         st.session_state.history = []
-        st.session_state.current_question = ""
         st.rerun()
 
 # ---------------------------------------------------------------------------
-# Query execution
+# Chat transcript
 # ---------------------------------------------------------------------------
-if ask_clicked and question.strip():
-    st.session_state.current_question = question.strip()
-    with st.spinner("Searching documents and generating answer…"):
+for entry in st.session_state.history:
+    with st.chat_message("user"):
+        st.markdown(entry["question"])
+
+    with st.chat_message("assistant"):
+        st.markdown(entry["answer"])
+        if entry["sources"]:
+            with st.expander("Sources", expanded=False):
+                st.caption("Context used for this answer:")
+                for i, src in enumerate(entry["sources"]):
+                    st.markdown(f"**Source {i + 1}:** `{src['source_url']}`")
+                    st.caption(f"Relevance score: {src['score']:.4f}")
+                    st.markdown(src["text"])
+                    if i < len(entry["sources"]) - 1:
+                        st.markdown("---")
+
+if not st.session_state.history:
+    st.info("Upload documents in the sidebar and ask a question above to get started.")
+
+# ---------------------------------------------------------------------------
+# Chat input + query execution
+# ---------------------------------------------------------------------------
+question = st.chat_input("Ask a question about your documents...")
+
+if question and question.strip():
+    with st.spinner("Searching documents and generating answer..."):
         try:
             resp = httpx.post(
                 f"{BACKEND_URL}/query",
@@ -103,42 +138,13 @@ if ask_clicked and question.strip():
             )
             resp.raise_for_status()
             data = resp.json()
-            st.session_state.history.insert(0, {
+            st.session_state.history.append({
                 "question": question.strip(),
                 "answer": data["answer"],
                 "sources": data["sources"],
             })
+            st.rerun()
         except httpx.ConnectError:
-            st.error("Cannot connect to the backend. Make sure the FastAPI server is running on port 8000.")
+            st.error("Cannot connect to the backend. Make sure the FastAPI server is running.")
         except Exception as e:
             st.error(f"Error: {e}")
-
-# ---------------------------------------------------------------------------
-# Results display
-# ---------------------------------------------------------------------------
-for entry in st.session_state.history:
-    st.subheader(f"Q: {entry['question']}")
-
-    answer_col, source_col = st.columns([1, 1], gap="large")
-
-    with answer_col:
-        st.markdown("#### 🤖 AI Answer")
-        st.markdown(entry["answer"])
-
-    with source_col:
-        st.markdown("#### 📄 Source Verification")
-        st.caption("Context from uploaded documents:")
-
-        for i, src in enumerate(entry["sources"]):
-            with st.expander(
-                f"Source {i + 1} — {src['source_url']}",
-                expanded=(i == 0),
-            ):
-                st.caption(f"Relevance score: {src['score']:.4f}")
-                st.markdown("---")
-                st.markdown(src["text"])
-
-    st.divider()
-
-if not st.session_state.history:
-    st.info("Upload documents in the sidebar and ask a question above to get started.")
