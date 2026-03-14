@@ -12,58 +12,60 @@ BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
 # Page config
 # ---------------------------------------------------------------------------
 st.set_page_config(
-    page_title="SG-ComplianceGuard",
-    page_icon="🇸🇬",
+    page_title="Document RAG",
+    page_icon="📄",
     layout="wide",
 )
 
 # ---------------------------------------------------------------------------
 # Header
 # ---------------------------------------------------------------------------
-st.title("🇸🇬 SG-ComplianceGuard")
+st.title("📄 Document RAG Assistant")
 st.caption(
-    "Ask questions about Singapore MOM employment regulations. "
-    "All answers are grounded in official MOM sources — no hallucination, no data leaves your machine."
+    "Upload your documents (PDF, CSV, Excel, TXT) and ask questions about them. "
+    "All processing and indexing is done locally."
 )
 st.divider()
 
 # ---------------------------------------------------------------------------
-# Session state — preserve conversation history + input state
+# Session state
 # ---------------------------------------------------------------------------
 if "history" not in st.session_state:
     st.session_state.history = []
 if "current_question" not in st.session_state:
     st.session_state.current_question = ""
-if "auto_submit" not in st.session_state:
-    st.session_state.auto_submit = False
 
 # ---------------------------------------------------------------------------
-# Sidebar — example questions + info
+# Sidebar — File Upload
 # ---------------------------------------------------------------------------
 with st.sidebar:
-    st.header("Example Questions")
-    example_questions = [
-        "What is the minimum salary for an Employment Pass?",
-        "How many days of sick leave is an employee entitled to?",
-        "What are the grounds for wrongful dismissal?",
-        "What is the notice period for termination?",
-        "Who is covered under the Employment Act?",
-        "What are the S Pass quota requirements?",
-        "Can an employer deduct salary without consent?",
-        "What happens to unused annual leave upon resignation?",
-    ]
-    for q in example_questions:
-        if st.button(q, use_container_width=True):
-            st.session_state.current_question = q
-            st.session_state.auto_submit = True
-            st.rerun()
+    st.header("📤 Upload Documents")
+    uploaded_files = st.file_uploader(
+        "Choose files", 
+        type=["pdf", "csv", "xlsx", "xls", "txt"], 
+        accept_multiple_files=True
+    )
+    
+    if st.button("Process & Index", type="primary", use_container_width=True):
+        if not uploaded_files:
+            st.warning("Please upload at least one file.")
+        else:
+            for uploaded_file in uploaded_files:
+                with st.spinner(f"Indexing {uploaded_file.name}..."):
+                    try:
+                        files = {"file": (uploaded_file.name, uploaded_file.getvalue())}
+                        resp = httpx.post(f"{BACKEND_URL}/upload", files=files, timeout=300.0)
+                        resp.raise_for_status()
+                        st.success(f"Indexed {uploaded_file.name} ({resp.json()['chunks']} chunks)")
+                    except Exception as e:
+                        st.error(f"Error indexing {uploaded_file.name}: {e}")
 
     st.divider()
     st.markdown("**Stack**")
     st.markdown(
         "- 🔍 Qdrant (vector DB)\n"
         "- 🤗 all-MiniLM-L6-v2 (embeddings)\n"
-        "- 🦙 llama3.2:3b via Ollama\n"
+        "- 🦙 local LLM via Ollama\n"
         "- ⚡ FastAPI backend\n"
         "- 🔒 100% local — PDPA compliant"
     )
@@ -72,9 +74,9 @@ with st.sidebar:
 # Query input
 # ---------------------------------------------------------------------------
 question = st.text_input(
-    "Ask a question about MOM regulations:",
+    "Ask a question about your documents:",
     value=st.session_state.current_question,
-    placeholder="e.g. What is the minimum salary for an Employment Pass?",
+    placeholder="e.g. What is the summary of the financial report?",
     key="question_input",
 )
 
@@ -87,18 +89,12 @@ with clear_col:
         st.session_state.current_question = ""
         st.rerun()
 
-# Trigger from sidebar example button
-if st.session_state.auto_submit:
-    st.session_state.auto_submit = False
-    ask_clicked = True
-    question = st.session_state.current_question
-
 # ---------------------------------------------------------------------------
 # Query execution
 # ---------------------------------------------------------------------------
 if ask_clicked and question.strip():
     st.session_state.current_question = question.strip()
-    with st.spinner("Searching MOM regulations and generating answer…"):
+    with st.spinner("Searching documents and generating answer…"):
         try:
             resp = httpx.post(
                 f"{BACKEND_URL}/query",
@@ -125,33 +121,24 @@ for entry in st.session_state.history:
 
     answer_col, source_col = st.columns([1, 1], gap="large")
 
-    # Left — AI answer
     with answer_col:
         st.markdown("#### 🤖 AI Answer")
         st.markdown(entry["answer"])
 
-    # Right — source verification panel
     with source_col:
         st.markdown("#### 📄 Source Verification")
-        st.caption("Original MOM text the answer is based on:")
+        st.caption("Context from uploaded documents:")
 
         for i, src in enumerate(entry["sources"]):
             with st.expander(
-                f"Source {i + 1} — {src['source_url'].split('/')[-1].replace('-', ' ').title()}",
+                f"Source {i + 1} — {src['source_url']}",
                 expanded=(i == 0),
             ):
-                st.markdown(
-                    f"**[View on MOM website ↗]({src['source_url']})**",
-                    unsafe_allow_html=True,
-                )
                 st.caption(f"Relevance score: {src['score']:.4f}")
                 st.markdown("---")
                 st.markdown(src["text"])
 
     st.divider()
 
-# ---------------------------------------------------------------------------
-# Empty state
-# ---------------------------------------------------------------------------
 if not st.session_state.history:
-    st.info("Ask a question above to get started. Use the sidebar for examples.")
+    st.info("Upload documents in the sidebar and ask a question above to get started.")

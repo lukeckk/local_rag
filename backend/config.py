@@ -3,7 +3,7 @@ import os
 # Qdrant
 QDRANT_HOST = os.getenv("QDRANT_HOST", "localhost")
 QDRANT_PORT = int(os.getenv("QDRANT_PORT", 6333))
-COLLECTION_NAME = "mom_regulations"
+COLLECTION_NAME = "document_rag"
 
 # Embedding model (HuggingFace sentence-transformers)
 EMBED_MODEL = "all-MiniLM-L6-v2"
