@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 
 TOP_K = 5
 OLLAMA_TIMEOUT = 120.0
+MIN_VECTOR_SCORE = 0.35
 
 # Global state
 _state: dict[str, Any] = {}
@@ -141,10 +142,11 @@ def _build_prompt(question: str, context_chunks: list[dict]) -> str:
         f"[Source: {c['payload']['source_url']}]\n{c['payload']['text']}"
         for c in context_chunks
     )
-    return f"""You are a helpful document analysis assistant. 
-Answer the question using ONLY the context below. 
-If the answer is not in the context, say "I don't have enough information to answer that."
-Be concise and cite which source document your answer is based on.
+    return f"""You are a helpful assistant.
+If relevant context is provided below, use it as the primary source of truth.
+If context is missing, insufficient, or not relevant to the question, answer naturally using your general knowledge.
+If the user sends a greeting or casual small talk, respond conversationally and do not say you lack enough information.
+When you use context, cite the supporting source label(s). When you do not use context, do not invent citations.
 
 CONTEXT:
 {context}
@@ -153,13 +155,27 @@ QUESTION: {question}
 
 ANSWER:"""
 
-async def _call_ollama(prompt: str) -> str:
+
+def _should_skip_retrieval(question: str) -> bool:
+    normalized = question.strip().lower()
+    words = normalized.split()
+    if not words:
+        return True
+    if normalized in {"hi", "hello", "hey", "yo", "sup", "thanks", "thank you"}:
+        return True
+    # Very short conversational turns are usually chat, not document QA.
+    return len(words) <= 2 and not normalized.endswith("?")
+
+
+async def _call_ollama(prompt: str, system_prompt: str | None = None) -> str:
     url = f"http://{OLLAMA_HOST}:{OLLAMA_PORT}/api/generate"
     payload = {
         "model": OLLAMA_MODEL,
         "prompt": prompt,
         "stream": False,
     }
+    if system_prompt:
+        payload["system"] = system_prompt
     async with httpx.AsyncClient(timeout=OLLAMA_TIMEOUT) as client:
         resp = await client.post(url, json=payload)
         resp.raise_for_status()
@@ -179,26 +195,40 @@ async def query(req: QueryRequest):
 
     logger.info(f"Query: {req.question!r}")
 
-    vector = _embed(req.question)
-    vector_hits = _vector_search(vector, limit=TOP_K * 2)
-    keyword_hits = _keyword_search(req.question, limit=TOP_K * 2)
-    fused = _reciprocal_rank_fusion(vector_hits, keyword_hits)
+    if _should_skip_retrieval(req.question):
+        vector_hits = []
+        fused = []
+    else:
+        vector = _embed(req.question)
+        vector_hits = _vector_search(vector, limit=TOP_K * 2)
+        keyword_hits = _keyword_search(req.question, limit=TOP_K * 2)
+        fused = _reciprocal_rank_fusion(vector_hits, keyword_hits)
 
     logger.info(f"Retrieved {len(fused)} chunks after fusion")
 
-    prompt = _build_prompt(req.question, fused)
-    answer = await _call_ollama(prompt)
+    top_vector_score = vector_hits[0]["score"] if vector_hits else 0.0
+    has_relevant_context = bool(fused) and top_vector_score >= MIN_VECTOR_SCORE
+
+    prompt_context = fused if has_relevant_context else []
+    prompt = _build_prompt(req.question, prompt_context)
+    system_prompt = (
+        "You are a document assistant. Prefer provided context, be accurate, and cite sources when using it."
+        if has_relevant_context
+        else "You are a friendly conversational assistant. Reply naturally to greetings and normal chat."
+    )
+    answer = await _call_ollama(prompt, system_prompt=system_prompt)
 
     seen_urls: set[str] = set()
     sources = []
-    for hit in fused:
-        url = hit["payload"].get("source_url", "")
-        if url not in seen_urls:
-            seen_urls.add(url)
-            sources.append(SourceDoc(
-                text=hit["payload"]["text"],
-                source_url=url,
-                score=round(hit["score"], 4),
-            ))
+    if has_relevant_context:
+        for hit in fused:
+            url = hit["payload"].get("source_url", "")
+            if url not in seen_urls:
+                seen_urls.add(url)
+                sources.append(SourceDoc(
+                    text=hit["payload"]["text"],
+                    source_url=url,
+                    score=round(hit["score"], 4),
+                ))
 
     return QueryResponse(answer=answer, sources=sources)
