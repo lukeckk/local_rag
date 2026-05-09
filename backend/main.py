@@ -1,9 +1,9 @@
 import logging
 from contextlib import asynccontextmanager
-from typing import Any
+from typing import Any, Literal
 import httpx
 from fastapi import FastAPI, HTTPException, UploadFile, File
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from qdrant_client.models import Filter, FieldCondition, MatchText, MatchValue
@@ -27,6 +27,8 @@ logger = logging.getLogger(__name__)
 TOP_K = 5
 OLLAMA_TIMEOUT = 120.0
 MIN_VECTOR_SCORE = 0.18
+MAX_HISTORY_MESSAGES = 1000
+MAX_HISTORY_MESSAGES_IN_PROMPT = 40
 
 # Global state
 _state: dict[str, Any] = {}
@@ -62,8 +64,14 @@ async def upload_file(file: UploadFile = File(...)):
 # ---------------------------------------------------------------------------
 # Schemas
 # ---------------------------------------------------------------------------
+class ChatMessage(BaseModel):
+    role: Literal["user", "assistant"]
+    content: str
+
+
 class QueryRequest(BaseModel):
     question: str
+    history: list[ChatMessage] = Field(default_factory=list)
 
 class SourceDoc(BaseModel):
     text: str
@@ -169,16 +177,24 @@ def _reciprocal_rank_fusion(
         for doc_id, score in ranked[:TOP_K]
     ]
 
-def _build_prompt(question: str, context_chunks: list[dict]) -> str:
+def _build_prompt(question: str, context_chunks: list[dict], history: list[ChatMessage]) -> str:
+    history_for_prompt = history[-MAX_HISTORY_MESSAGES_IN_PROMPT:]
+    conversation = "\n".join(
+        f"{msg.role.upper()}: {msg.content}"
+        for msg in history_for_prompt
+    )
     context = "\n\n---\n\n".join(
         f"[Source: {c['payload']['source_url']}]\n{c['payload']['text']}"
         for c in context_chunks
-    )
+    ) or "(No retrieved document context)"
     return f"""You are a helpful assistant.
 If relevant context is provided below, use it as the primary source of truth.
 If context is missing, insufficient, or not relevant to the question, answer naturally using your general knowledge.
 If the user sends a greeting or casual small talk, respond conversationally and do not say you lack enough information.
 When you use context, cite the supporting source label(s). When you do not use context, do not invent citations.
+
+CONVERSATION HISTORY:
+{conversation}
 
 CONTEXT:
 {context}
@@ -255,6 +271,11 @@ def delete_document(filename: str):
 async def query(req: QueryRequest):
     if not req.question.strip():
         raise HTTPException(status_code=400, detail="Question cannot be empty.")
+    if len(req.history) > MAX_HISTORY_MESSAGES:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Message too long. Maximum supported history is {MAX_HISTORY_MESSAGES} messages.",
+        )
 
     logger.info(f"Query: {req.question!r}")
 
@@ -275,7 +296,7 @@ async def query(req: QueryRequest):
     )
 
     prompt_context = fused if has_relevant_context else []
-    prompt = _build_prompt(req.question, prompt_context)
+    prompt = _build_prompt(req.question, prompt_context, req.history)
     system_prompt = (
         "You are a document assistant. You DO have access to the provided CONTEXT block. "
         "Never say you cannot access files when context is present. Prefer the provided context, "

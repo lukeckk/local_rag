@@ -8,6 +8,7 @@ import httpx
 import streamlit as st
 
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
+MAX_HISTORY_MESSAGES = 1000
 
 # ---------------------------------------------------------------------------
 # Page config
@@ -111,6 +112,17 @@ with st.sidebar:
         st.session_state.history = []
         st.rerun()
 
+    st.divider()
+    st.header("💬 Conversation History")
+    if not st.session_state.history:
+        st.caption("No messages yet.")
+    else:
+        for idx, entry in enumerate(st.session_state.history[-12:], start=max(1, len(st.session_state.history) - 11)):
+            preview = entry["question"].strip().replace("\n", " ")
+            if len(preview) > 55:
+                preview = preview[:55] + "..."
+            st.caption(f"{idx}. {preview}")
+
 # ---------------------------------------------------------------------------
 # Chat transcript
 # ---------------------------------------------------------------------------
@@ -140,11 +152,23 @@ if not st.session_state.history:
 question = st.chat_input("Ask a question about your documents...")
 
 if question and question.strip():
+    history_payload = []
+    for turn in st.session_state.history:
+        history_payload.append({"role": "user", "content": turn["question"]})
+        history_payload.append({"role": "assistant", "content": turn["answer"]})
+
+    if len(history_payload) >= MAX_HISTORY_MESSAGES:
+        st.error(
+            f"Message too long. This conversation has reached {MAX_HISTORY_MESSAGES} messages. "
+            "Please clear chat history to continue."
+        )
+        st.stop()
+
     with st.spinner("Searching documents and generating answer..."):
         try:
             resp = httpx.post(
                 f"{BACKEND_URL}/query",
-                json={"question": question.strip()},
+                json={"question": question.strip(), "history": history_payload},
                 timeout=120.0,
             )
             resp.raise_for_status()
