@@ -18,10 +18,20 @@ st.set_page_config(
     layout="wide",
 )
 
+# Keep Streamlit settings menu (theme switcher) but hide Deploy button.
+st.markdown(
+    """
+    <style>
+    [data-testid="stAppDeployButton"] {display: none;}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 # ---------------------------------------------------------------------------
 # Header
 # ---------------------------------------------------------------------------
-st.title("📄 Document RAG Assistant")
+st.title("📄 LOCAL RAG")
 st.caption(
     "Upload your documents (PDF, CSV, Excel, TXT) and ask questions about them. "
     "All processing and indexing is done locally."
@@ -113,9 +123,10 @@ for entry in st.session_state.history:
         if entry["sources"]:
             with st.expander("Sources", expanded=False):
                 st.caption("Context used for this answer:")
+                st.caption("`Rank score` is retrieval ordering from hybrid search, not answer certainty.")
                 for i, src in enumerate(entry["sources"]):
                     st.markdown(f"**Source {i + 1}:** `{src['source_url']}`")
-                    st.caption(f"Relevance score: {src['score']:.4f}")
+                    st.caption(f"Rank score: {src['score']:.4f}")
                     st.markdown(src["text"])
                     if i < len(entry["sources"]) - 1:
                         st.markdown("---")
