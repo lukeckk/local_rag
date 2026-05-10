@@ -3,71 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LOCAL RAG Setup Guide</title>
+    <title>Local RAG Quick Start</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="container">
+    <main class="shell">
       <header class="hero">
-        <p class="badge">LOCAL RAG</p>
-        <h1>Get Started in Minutes</h1>
-        <p class="subtitle">
-          This page walks new users through setup, startup, and first query for this local
-          document RAG app.
-        </p>
+        <div>
+          <p class="eyebrow">Local RAG</p>
+          <h1>Quick Start</h1>
+          <p class="subtitle">Start the stack, upload a document, and ask your first question.</p>
+        </div>
+        <a class="primary-link" href="http://localhost:8502">Open App</a>
       </header>
 
-      <section class="card">
-        <h2>1) Prerequisites</h2>
-        <ul>
-          <li>Docker Desktop installed and running</li>
-          <li>Ollama installed locally</li>
-          <li>Model pulled in Ollama: <code>llama3.2:3b</code></li>
+      <section class="summary">
+        <div>
+          <span>Need</span>
+          <strong>Docker + Ollama</strong>
+        </div>
+        <div>
+          <span>Model</span>
+          <strong>llama3.2:3b</strong>
+        </div>
+        <div>
+          <span>App</span>
+          <strong>localhost:8502</strong>
+        </div>
+      </section>
+
+      <section class="steps" aria-label="Setup steps">
+        <article class="step-card">
+          <span class="step-number">1</span>
+          <div>
+            <h2>Install the basics</h2>
+            <p>Make sure Docker Desktop and Ollama are running.</p>
+            <pre><code>ollama pull llama3.2:3b</code></pre>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">2</span>
+          <div>
+            <h2>Start the app</h2>
+            <pre><code>cd /Users/lukecheng/rag_documents
+docker compose up -d --build</code></pre>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">3</span>
+          <div>
+            <h2>Open the tools</h2>
+            <div class="service-grid">
+              <a href="http://localhost:8502">
+                <span>Frontend</span>
+                <strong>localhost:8502</strong>
+              </a>
+              <a href="http://localhost:8001/health">
+                <span>Backend health</span>
+                <strong>localhost:8001/health</strong>
+              </a>
+              <a href="http://localhost:6335/dashboard">
+                <span>Qdrant</span>
+                <strong>localhost:6335/dashboard</strong>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">4</span>
+          <div>
+            <h2>Use it</h2>
+            <ol>
+              <li>Upload a PDF, CSV, spreadsheet, or text file.</li>
+              <li>Click <strong>Process &amp; Index</strong>.</li>
+              <li>Ask a question about the file.</li>
+            </ol>
+          </div>
+        </article>
+      </section>
+
+      <section class="help-panel">
+        <h2>Quick fixes</h2>
+        <ul class="fix-list">
+          <li><span>No model answer</span><code>ollama serve</code></li>
+          <li><span>Page looks stale</span><code>Cmd + Shift + R</code></li>
+          <li><span>Reset everything</span><code>docker compose down -v</code></li>
+          <li><span>Check backend logs</span><code>docker logs doc_backend</code></li>
         </ul>
-        <pre><code>ollama pull llama3.2:3b</code></pre>
       </section>
-
-      <section class="card">
-        <h2>2) Start the App</h2>
-        <p>From any location, run:</p>
-        <pre><code>cd /Users/lukecheng/rag_documents
-docker compose up -d --build
-
-# Or as a one-liner:
-cd /Users/lukecheng/rag_documents && docker compose up -d --build</code></pre>
-      </section>
-
-      <section class="card">
-        <h2>3) Open Services</h2>
-        <ul>
-          <li><strong>Frontend:</strong> <a href="http://localhost:8502">http://localhost:8502</a></li>
-          <li><strong>Backend Health:</strong> <a href="http://localhost:8001/health">http://localhost:8001/health</a></li>
-          <li><strong>Qdrant Dashboard:</strong> <a href="http://localhost:6335/dashboard">http://localhost:6335/dashboard</a></li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>4) First-Time Usage</h2>
-        <ol>
-          <li>Go to the sidebar and upload a file (PDF, CSV, XLSX, XLS, or TXT).</li>
-          <li>Click <strong>Process &amp; Index</strong>.</li>
-          <li>Ask questions in chat about the uploaded content.</li>
-          <li>Use <strong>Indexed Files</strong> to delete individual files from vector storage.</li>
-        </ol>
-      </section>
-
-      <section class="card">
-        <h2>5) Troubleshooting</h2>
-        <ul>
-          <li><strong>No answer from model:</strong> ensure Ollama is running on your host.</li>
-          <li><strong>Changes not visible:</strong> hard refresh browser or restart relevant container.</li>
-          <li><strong>Clean reset:</strong> <code>docker compose down -v</code> then start again.</li>
-        </ul>
-      </section>
-
-      <footer class="footer">
-        <p>Need help? Check container logs with <code>docker logs doc_backend</code>.</p>
-      </footer>
     </main>
   </body>
 </html>
