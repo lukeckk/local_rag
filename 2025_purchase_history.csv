@@ -1,0 +1,1001 @@
+date,customer name,product,price
+2025-01-01,Kimberly Wright,Coffee Maker,95.09
+2025-01-02,Deborah Wilson,Air Purifier,92.41
+2025-01-02,Robert Smith,Desk Lamp,22.75
+2025-01-02,Margaret Garcia,Mechanical Keyboard,157.10
+2025-01-02,James Garcia,USB-C Cable,22.19
+2025-01-03,Jennifer Johnson,External Hard Drive,88.03
+2025-01-03,Nancy Robinson,Noise-Canceling Headphones,88.78
+2025-01-04,John Brown,Desk Lamp,24.03
+2025-01-04,Steven White,Monitor Arm,104.72
+2025-01-05,James Perez,USB-C Cable,24.79
+2025-01-07,Lisa Lee,Noise-Canceling Headphones,165.09
+2025-01-07,Brian Flores,Air Purifier,168.83
+2025-01-08,Thomas Wilson,Bluetooth Speaker,123.02
+2025-01-09,Jennifer Jackson,Desk Lamp,44.25
+2025-01-09,Daniel Jones,Backpack,47.90
+2025-01-09,Lisa Perez,USB-C Cable,24.65
+2025-01-09,Jessica Wilson,Laptop Stand,36.04
+2025-01-11,Donna Scott,Desk Lamp,55.30
+2025-01-11,Kimberly Walker,Wireless Mouse,33.28
+2025-01-13,Donald Miller,Mechanical Keyboard,104.07
+2025-01-13,Kimberly White,Portable Power Bank,76.19
+2025-01-14,Anthony Brown,Fitness Tracker,125.29
+2025-01-14,Lisa Scott,Air Purifier,142.70
+2025-01-14,Jennifer Thompson,Monitor Arm,49.30
+2025-01-15,Barbara Gonzalez,Coffee Maker,173.09
+2025-01-16,Patricia Walker,Fitness Tracker,113.93
+2025-01-16,Nancy Ramirez,External Hard Drive,128.09
+2025-01-16,Stephanie Moore,Bluetooth Speaker,112.77
+2025-01-17,Nancy Jones,Portable Power Bank,36.65
+2025-01-17,Joshua Martinez,Webcam,143.85
+2025-01-17,Barbara Lee,Wireless Mouse,49.03
+2025-01-17,Mark Taylor,Backpack,106.90
+2025-01-18,Mark Hill,Bluetooth Speaker,62.02
+2025-01-18,Christopher Johnson,Water Bottle,17.82
+2025-01-19,Betty Young,Smart Watch,334.14
+2025-01-19,Emily Clark,Desk Lamp,39.30
+2025-01-19,Emily Scott,Wireless Mouse,45.64
+2025-01-20,Patricia White,Mechanical Keyboard,59.97
+2025-01-20,Barbara Clark,Smart Watch,333.47
+2025-01-20,Jennifer Brown,Desk Lamp,56.09
+2025-01-20,Barbara Moore,Fitness Tracker,71.57
+2025-01-21,Jessica Lewis,Webcam,92.88
+2025-01-21,Amanda Lee,Fitness Tracker,187.38
+2025-01-21,Joseph Young,Desk Lamp,23.76
+2025-01-21,Carol Lee,USB-C Cable,19.95
+2025-01-22,Karen White,Bluetooth Speaker,120.89
+2025-01-22,Margaret Johnson,Webcam,140.53
+2025-01-22,Joseph Wilson,Air Purifier,160.83
+2025-01-22,Edward Lewis,Monitor Arm,61.84
+2025-01-23,George King,Mechanical Keyboard,109.54
+2025-01-23,Kenneth Harris,Backpack,49.09
+2025-01-23,Richard Williams,Water Bottle,37.99
+2025-01-23,Betty Lewis,Desk Lamp,52.38
+2025-01-23,Melissa Davis,Wireless Mouse,46.22
+2025-01-24,Joseph Sanchez,Electric Kettle,28.55
+2025-01-24,John Moore,Monitor Arm,96.34
+2025-01-24,James Rodriguez,Smart Watch,182.16
+2025-01-24,Kenneth Nguyen,USB-C Cable,21.12
+2025-01-25,Carol Perez,External Hard Drive,76.17
+2025-01-25,Daniel Harris,Portable Power Bank,42.30
+2025-01-25,Kevin Miller,Wireless Mouse,26.20
+2025-01-26,William Torres,Coffee Maker,176.41
+2025-01-27,Jennifer Ramirez,External Hard Drive,65.72
+2025-01-27,David Clark,Portable Power Bank,27.95
+2025-01-27,Elizabeth Hernandez,Electric Kettle,28.22
+2025-01-27,Donna Walker,Smart Watch,231.05
+2025-01-27,Barbara Anderson,Portable Power Bank,88.69
+2025-01-28,Amanda Miller,Bluetooth Speaker,76.23
+2025-01-28,Emily Jackson,Noise-Canceling Headphones,220.32
+2025-01-28,Richard King,Backpack,84.14
+2025-01-28,Jessica Young,Fitness Tracker,66.90
+2025-01-28,Joseph Robinson,Water Bottle,26.79
+2025-01-29,Joseph Williams,Water Bottle,22.02
+2025-01-29,David Allen,Mechanical Keyboard,80.43
+2025-01-29,Edward Anderson,Air Purifier,223.90
+2025-01-29,Steven Hernandez,Laptop Stand,48.66
+2025-01-30,John Sanchez,Backpack,73.73
+2025-01-31,William Lewis,Tablet Case,35.75
+2025-01-31,Andrew Thompson,Monitor Arm,68.10
+2025-01-31,William Miller,Tablet Case,55.82
+2025-02-01,Melissa Rodriguez,Portable Power Bank,34.50
+2025-02-01,Kevin Davis,Webcam,66.81
+2025-02-02,Kenneth Robinson,Mechanical Keyboard,134.39
+2025-02-02,Donald Lewis,Backpack,73.75
+2025-02-02,Andrew Miller,Monitor Arm,58.69
+2025-02-03,Susan Torres,Water Bottle,16.37
+2025-02-03,Susan Wilson,Tablet Case,52.27
+2025-02-04,Kimberly Wright,Portable Power Bank,75.04
+2025-02-04,Jennifer Harris,Monitor Arm,79.73
+2025-02-04,Thomas Miller,Coffee Maker,154.71
+2025-02-05,Robert Anderson,Mechanical Keyboard,178.07
+2025-02-05,Kevin Perez,Electric Kettle,45.39
+2025-02-05,Jessica Jackson,Desk Lamp,64.80
+2025-02-05,Donald Williams,Mechanical Keyboard,103.14
+2025-02-06,Patricia Hernandez,Mechanical Keyboard,127.35
+2025-02-07,James Robinson,Electric Kettle,89.89
+2025-02-07,Andrew Brown,Noise-Canceling Headphones,112.81
+2025-02-07,Richard Nguyen,Monitor Arm,61.69
+2025-02-07,Jennifer Moore,Noise-Canceling Headphones,163.59
+2025-02-07,Lisa Sanchez,Air Purifier,97.17
+2025-02-07,Patricia Lopez,External Hard Drive,132.54
+2025-02-07,Daniel Allen,USB-C Cable,12.92
+2025-02-08,Brian Martinez,Monitor Arm,43.59
+2025-02-08,Kevin Brown,Wireless Mouse,35.30
+2025-02-08,Nancy Hill,Electric Kettle,87.06
+2025-02-08,Mary Jones,Coffee Maker,183.90
+2025-02-08,George Miller,External Hard Drive,143.75
+2025-02-08,Edward Young,Water Bottle,17.22
+2025-02-10,Michelle Harris,Electric Kettle,69.39
+2025-02-10,Margaret Hill,Smart Watch,236.36
+2025-02-10,Thomas Gonzalez,Monitor Arm,67.44
+2025-02-10,Lisa Sanchez,Webcam,97.79
+2025-02-10,Steven Wilson,Noise-Canceling Headphones,198.00
+2025-02-11,David Martinez,Desk Lamp,42.97
+2025-02-11,Sarah Lewis,Tablet Case,35.82
+2025-02-13,Jessica Clark,Phone Charger,29.42
+2025-02-13,Jennifer Ramirez,USB-C Cable,20.65
+2025-02-13,Karen Scott,Fitness Tracker,146.51
+2025-02-13,Stephanie Flores,Mechanical Keyboard,153.74
+2025-02-13,Michael Thomas,Backpack,40.79
+2025-02-13,Linda Martinez,Backpack,54.62
+2025-02-13,Donna Miller,Portable Power Bank,29.34
+2025-02-14,Sarah Lewis,Desk Lamp,65.02
+2025-02-14,Mark Davis,Desk Lamp,32.58
+2025-02-15,Charles Taylor,Water Bottle,13.47
+2025-02-16,Joseph Torres,Air Purifier,241.62
+2025-02-16,Michelle Hill,Portable Power Bank,46.90
+2025-02-16,James Martin,Webcam,73.18
+2025-02-17,Nancy Hill,Electric Kettle,83.05
+2025-02-18,Charles Ramirez,Water Bottle,29.94
+2025-02-19,Patricia Jackson,Fitness Tracker,179.61
+2025-02-19,Betty White,Water Bottle,26.72
+2025-02-19,Kimberly Martinez,Desk Lamp,31.51
+2025-02-19,Mark Lewis,Water Bottle,12.01
+2025-02-21,John Wright,Coffee Maker,118.46
+2025-02-21,Richard Jackson,Desk Lamp,41.64
+2025-02-21,Steven Wright,Portable Power Bank,22.63
+2025-02-21,Christopher Wright,Backpack,108.39
+2025-02-22,Melissa King,USB-C Cable,12.84
+2025-02-23,William Perez,Tablet Case,45.59
+2025-02-23,John Perez,Smart Watch,321.97
+2025-02-24,Deborah Scott,Noise-Canceling Headphones,139.91
+2025-02-24,Jessica Harris,Air Purifier,141.01
+2025-02-24,Nancy Jackson,Webcam,148.68
+2025-02-24,Robert Hernandez,Phone Charger,14.91
+2025-02-25,Donna Johnson,Mechanical Keyboard,124.84
+2025-02-25,Mark Allen,Desk Lamp,76.71
+2025-02-25,Ashley Lewis,Laptop Stand,83.95
+2025-02-25,Margaret Rodriguez,External Hard Drive,154.57
+2025-02-25,George Smith,Bluetooth Speaker,74.72
+2025-02-26,Elizabeth Hernandez,Tablet Case,41.02
+2025-02-26,Kevin Johnson,Noise-Canceling Headphones,83.26
+2025-02-27,Lisa Martin,Desk Lamp,23.47
+2025-02-27,Robert Clark,Electric Kettle,74.78
+2025-02-28,Daniel Ramirez,USB-C Cable,12.81
+2025-02-28,Mary Lopez,Phone Charger,28.11
+2025-02-28,Michael Anderson,Wireless Mouse,33.52
+2025-02-28,Matthew Taylor,Monitor Arm,112.39
+2025-03-01,Thomas Lopez,Air Purifier,243.62
+2025-03-01,David Williams,Bluetooth Speaker,67.38
+2025-03-01,Sandra Flores,Electric Kettle,28.57
+2025-03-01,Karen Sanchez,Phone Charger,27.11
+2025-03-01,Anthony Lewis,Fitness Tracker,68.53
+2025-03-02,Carol Martinez,Phone Charger,42.63
+2025-03-02,Donald Brown,Air Purifier,178.64
+2025-03-02,Christopher Davis,USB-C Cable,16.45
+2025-03-02,Ashley Johnson,USB-C Cable,14.85
+2025-03-03,George Gonzalez,Water Bottle,13.58
+2025-03-03,Jennifer Hernandez,Mechanical Keyboard,157.42
+2025-03-03,Betty Wilson,Webcam,128.94
+2025-03-03,Matthew Williams,Tablet Case,26.11
+2025-03-04,Sandra Garcia,Coffee Maker,140.87
+2025-03-04,Richard Rodriguez,Desk Lamp,67.41
+2025-03-05,George Martin,Portable Power Bank,41.64
+2025-03-05,Donna Harris,Backpack,116.50
+2025-03-05,Lisa Williams,Fitness Tracker,181.47
+2025-03-06,Donald Davis,Air Purifier,241.11
+2025-03-06,Steven Nguyen,Water Bottle,36.08
+2025-03-06,Andrew Wilson,Laptop Stand,79.78
+2025-03-06,Deborah Moore,USB-C Cable,21.10
+2025-03-06,Robert Ramirez,Laptop Stand,89.29
+2025-03-07,Deborah Taylor,Monitor Arm,116.28
+2025-03-07,Michael Harris,Electric Kettle,64.39
+2025-03-08,Margaret Allen,Bluetooth Speaker,114.82
+2025-03-09,Kevin Martin,Webcam,67.93
+2025-03-09,Daniel Jones,Desk Lamp,42.16
+2025-03-09,Jessica Martinez,Water Bottle,34.84
+2025-03-09,Donna Anderson,Portable Power Bank,67.59
+2025-03-09,Susan Johnson,Air Purifier,165.78
+2025-03-09,Melissa Lopez,Portable Power Bank,57.96
+2025-03-10,Donald Martinez,Webcam,119.72
+2025-03-10,Amanda Perez,Phone Charger,26.19
+2025-03-11,Matthew Robinson,Backpack,88.69
+2025-03-11,John Robinson,Bluetooth Speaker,66.40
+2025-03-11,John Lewis,Smart Watch,324.66
+2025-03-11,Stephanie Clark,Backpack,119.31
+2025-03-12,Steven Young,Laptop Stand,75.34
+2025-03-12,Elizabeth Jones,Mechanical Keyboard,159.77
+2025-03-12,James Scott,Smart Watch,201.72
+2025-03-12,Brian Smith,Smart Watch,224.09
+2025-03-12,Anthony Gonzalez,Portable Power Bank,37.43
+2025-03-12,Anthony Miller,Portable Power Bank,70.30
+2025-03-13,Deborah Miller,Monitor Arm,48.68
+2025-03-13,Linda Smith,Bluetooth Speaker,114.72
+2025-03-13,Paul Gonzalez,External Hard Drive,155.35
+2025-03-13,Mark Hernandez,Smart Watch,241.58
+2025-03-13,Mark Hernandez,Desk Lamp,24.62
+2025-03-14,Melissa Moore,Laptop Stand,32.62
+2025-03-14,Stephanie Davis,Portable Power Bank,80.24
+2025-03-14,Linda Williams,Wireless Mouse,39.31
+2025-03-15,Anthony Martinez,Laptop Stand,58.16
+2025-03-16,David Wright,External Hard Drive,163.80
+2025-03-16,John Hernandez,Tablet Case,25.96
+2025-03-16,Patricia Brown,Coffee Maker,79.04
+2025-03-17,Mary Williams,Desk Lamp,79.03
+2025-03-18,Emily Hill,Portable Power Bank,49.62
+2025-03-19,David Gonzalez,Water Bottle,22.27
+2025-03-20,Lisa Hernandez,Monitor Arm,135.34
+2025-03-20,Melissa Wilson,Laptop Stand,54.88
+2025-03-20,William Lopez,Electric Kettle,77.58
+2025-03-20,Mary Robinson,Water Bottle,11.13
+2025-03-21,Anthony Miller,Phone Charger,31.54
+2025-03-22,Mark Wright,Mechanical Keyboard,129.51
+2025-03-22,Mark Robinson,Wireless Mouse,49.79
+2025-03-22,Steven Walker,Phone Charger,40.42
+2025-03-23,Michael Thomas,Desk Lamp,35.98
+2025-03-24,Sarah Lewis,Portable Power Bank,30.30
+2025-03-24,George Jones,Monitor Arm,134.17
+2025-03-24,Christopher Taylor,Noise-Canceling Headphones,264.65
+2025-03-26,Thomas Walker,Mechanical Keyboard,147.04
+2025-03-26,George Lewis,Bluetooth Speaker,76.97
+2025-03-26,Charles King,Webcam,43.94
+2025-03-26,Michelle Rodriguez,Coffee Maker,169.22
+2025-03-27,Lisa Hernandez,External Hard Drive,160.52
+2025-03-27,Stephanie Wright,Monitor Arm,40.72
+2025-03-28,Kevin Garcia,Mechanical Keyboard,117.00
+2025-03-28,John Allen,USB-C Cable,17.01
+2025-03-28,David Moore,Mechanical Keyboard,84.88
+2025-03-30,Sandra Wright,Water Bottle,26.38
+2025-03-30,Daniel Wilson,Smart Watch,168.74
+2025-03-31,Donald King,Webcam,139.92
+2025-03-31,Mary Sanchez,Webcam,96.70
+2025-03-31,Robert Jackson,Backpack,101.14
+2025-03-31,Carol Hill,Laptop Stand,80.50
+2025-04-01,Charles Brown,Wireless Mouse,36.29
+2025-04-01,Brian Nguyen,Smart Watch,282.61
+2025-04-03,Donna Ramirez,Phone Charger,43.91
+2025-04-03,Elizabeth Torres,Fitness Tracker,60.43
+2025-04-03,Susan Perez,Phone Charger,16.71
+2025-04-03,Stephanie Garcia,Phone Charger,21.63
+2025-04-03,Kevin Torres,Bluetooth Speaker,116.61
+2025-04-04,Amanda Perez,Laptop Stand,43.33
+2025-04-05,Joseph Flores,External Hard Drive,85.25
+2025-04-06,John Hill,Laptop Stand,70.50
+2025-04-07,Ashley Wright,Mechanical Keyboard,72.81
+2025-04-08,Joshua Allen,Noise-Canceling Headphones,270.08
+2025-04-08,Deborah Davis,Phone Charger,42.00
+2025-04-08,Anthony Scott,Monitor Arm,66.52
+2025-04-08,Melissa Perez,USB-C Cable,20.86
+2025-04-09,Anthony Harris,Smart Watch,253.87
+2025-04-09,Charles Allen,Laptop Stand,86.88
+2025-04-10,Stephanie Thompson,Backpack,94.09
+2025-04-10,Matthew Scott,Portable Power Bank,65.70
+2025-04-10,Charles Young,Webcam,69.39
+2025-04-12,Barbara Hill,Noise-Canceling Headphones,247.24
+2025-04-12,Mark Nguyen,Tablet Case,31.27
+2025-04-15,Kevin Lee,Desk Lamp,35.93
+2025-04-15,Karen Wilson,Noise-Canceling Headphones,248.11
+2025-04-15,Nancy Hill,Noise-Canceling Headphones,148.76
+2025-04-15,Anthony Allen,Electric Kettle,84.82
+2025-04-16,Melissa Nguyen,Phone Charger,13.17
+2025-04-16,William Jackson,Laptop Stand,58.40
+2025-04-16,Paul Ramirez,Laptop Stand,74.80
+2025-04-17,Nancy Martin,Wireless Mouse,30.29
+2025-04-17,Mark Martin,Webcam,61.79
+2025-04-18,Amanda Thomas,USB-C Cable,14.00
+2025-04-18,Margaret Nguyen,Electric Kettle,67.55
+2025-04-18,Edward Hernandez,Air Purifier,209.95
+2025-04-19,Sandra Lee,Water Bottle,32.83
+2025-04-19,Elizabeth Walker,Desk Lamp,70.83
+2025-04-20,Michelle Jackson,Phone Charger,17.00
+2025-04-20,Kenneth Martinez,Tablet Case,41.95
+2025-04-20,Kevin Perez,Water Bottle,20.81
+2025-04-22,Patricia Nguyen,Monitor Arm,46.09
+2025-04-22,Edward Flores,Portable Power Bank,53.23
+2025-04-23,Barbara King,Webcam,36.02
+2025-04-23,Kenneth Gonzalez,Electric Kettle,41.28
+2025-04-23,Christopher Williams,External Hard Drive,89.22
+2025-04-24,Richard Robinson,Backpack,53.98
+2025-04-24,Steven King,Monitor Arm,98.04
+2025-04-24,David Gonzalez,Fitness Tracker,105.83
+2025-04-24,Amanda Wright,Phone Charger,41.72
+2025-04-25,James Johnson,Mechanical Keyboard,110.18
+2025-04-25,Deborah Martin,Tablet Case,50.03
+2025-04-25,Kimberly Sanchez,Backpack,102.63
+2025-04-26,Amanda Sanchez,Monitor Arm,76.57
+2025-04-27,Joseph Johnson,Coffee Maker,100.74
+2025-04-27,Anthony Perez,Webcam,77.84
+2025-04-28,Steven Scott,Backpack,31.84
+2025-04-29,Kimberly Clark,Backpack,68.54
+2025-04-30,Michael Harris,External Hard Drive,118.93
+2025-04-30,Thomas Nguyen,Coffee Maker,105.14
+2025-04-30,Nancy Martinez,Electric Kettle,25.17
+2025-04-30,John Gonzalez,Noise-Canceling Headphones,251.58
+2025-05-01,Betty Davis,Air Purifier,121.85
+2025-05-01,Amanda Martin,Desk Lamp,68.38
+2025-05-01,Sarah Perez,Water Bottle,36.78
+2025-05-01,Lisa Miller,Backpack,76.71
+2025-05-01,Matthew Garcia,Backpack,46.32
+2025-05-01,Mark Moore,Water Bottle,19.05
+2025-05-01,Michael Jackson,Electric Kettle,29.53
+2025-05-02,William Clark,Phone Charger,26.84
+2025-05-02,William Lopez,Tablet Case,14.15
+2025-05-02,Donna Lee,Wireless Mouse,29.35
+2025-05-02,Anthony Young,Bluetooth Speaker,127.52
+2025-05-03,Sarah Lewis,Laptop Stand,72.80
+2025-05-03,Andrew Harris,Desk Lamp,71.35
+2025-05-03,Patricia Thomas,Laptop Stand,85.47
+2025-05-04,Brian Walker,Phone Charger,25.68
+2025-05-04,Patricia Hill,Fitness Tracker,149.07
+2025-05-05,Elizabeth Smith,USB-C Cable,21.22
+2025-05-05,Karen Nguyen,Backpack,69.95
+2025-05-05,Robert Torres,USB-C Cable,11.23
+2025-05-05,Andrew King,Smart Watch,271.32
+2025-05-05,Charles Harris,External Hard Drive,166.13
+2025-05-06,Elizabeth Smith,Tablet Case,14.11
+2025-05-06,Carol Jackson,Phone Charger,24.41
+2025-05-07,Deborah Scott,Monitor Arm,66.26
+2025-05-07,Kenneth Moore,Portable Power Bank,53.91
+2025-05-07,Richard Johnson,Electric Kettle,34.89
+2025-05-07,Sarah Scott,Mechanical Keyboard,79.22
+2025-05-07,Sandra Thompson,Noise-Canceling Headphones,140.63
+2025-05-07,George Young,Electric Kettle,65.07
+2025-05-07,Joseph Ramirez,External Hard Drive,169.20
+2025-05-08,John Lewis,Monitor Arm,49.78
+2025-05-08,Linda Robinson,Noise-Canceling Headphones,256.30
+2025-05-08,Emily Hill,Electric Kettle,71.87
+2025-05-08,Robert Robinson,Bluetooth Speaker,122.61
+2025-05-09,Patricia Walker,Backpack,77.67
+2025-05-09,Richard Flores,Webcam,129.59
+2025-05-10,Donald Davis,Laptop Stand,54.03
+2025-05-10,Donald Martinez,Coffee Maker,149.70
+2025-05-11,Sandra Taylor,Wireless Mouse,47.46
+2025-05-11,Susan Perez,Laptop Stand,85.32
+2025-05-11,Stephanie Wright,Electric Kettle,28.15
+2025-05-13,Nancy Moore,Electric Kettle,70.57
+2025-05-13,Deborah Garcia,Mechanical Keyboard,53.56
+2025-05-13,Anthony Sanchez,Fitness Tracker,160.50
+2025-05-14,Carol Lee,Wireless Mouse,42.60
+2025-05-15,Melissa Torres,Laptop Stand,59.76
+2025-05-15,Mark Robinson,External Hard Drive,89.40
+2025-05-16,Steven Young,External Hard Drive,177.68
+2025-05-16,Robert Miller,Electric Kettle,53.24
+2025-05-16,Kevin Garcia,Smart Watch,159.96
+2025-05-16,Nancy Flores,Fitness Tracker,147.47
+2025-05-16,Susan Thomas,Laptop Stand,51.02
+2025-05-16,Matthew Young,Air Purifier,183.51
+2025-05-16,David Hernandez,Air Purifier,223.81
+2025-05-17,Brian Jones,Electric Kettle,66.26
+2025-05-17,Steven Miller,Noise-Canceling Headphones,291.80
+2025-05-18,Stephanie Wright,Backpack,76.48
+2025-05-18,Kenneth Clark,Fitness Tracker,117.79
+2025-05-18,Andrew Brown,Noise-Canceling Headphones,245.48
+2025-05-18,Lisa Johnson,Water Bottle,34.51
+2025-05-19,Kenneth Scott,Desk Lamp,61.07
+2025-05-19,Michael Rodriguez,Laptop Stand,41.23
+2025-05-19,Barbara Johnson,Water Bottle,27.90
+2025-05-21,Christopher Davis,Air Purifier,195.02
+2025-05-21,Paul Jackson,Wireless Mouse,37.55
+2025-05-21,Jennifer White,External Hard Drive,70.70
+2025-05-22,Emily Smith,Portable Power Bank,86.35
+2025-05-22,Stephanie Clark,Water Bottle,38.02
+2025-05-23,John Moore,Backpack,85.93
+2025-05-23,Brian White,Webcam,144.02
+2025-05-23,Patricia Allen,Desk Lamp,53.02
+2025-05-24,Robert White,Coffee Maker,108.15
+2025-05-25,Karen Thomas,USB-C Cable,8.83
+2025-05-26,Stephanie Johnson,Mechanical Keyboard,76.70
+2025-05-27,Stephanie Anderson,Electric Kettle,77.12
+2025-05-27,Donald Rodriguez,Phone Charger,25.69
+2025-05-28,Melissa Jackson,Webcam,38.53
+2025-05-28,Kevin Sanchez,Monitor Arm,43.66
+2025-05-28,Jessica Martin,USB-C Cable,8.80
+2025-05-28,Melissa Garcia,Backpack,112.77
+2025-05-28,David Lopez,Water Bottle,35.25
+2025-05-28,William Robinson,Air Purifier,206.22
+2025-05-29,Charles Davis,Wireless Mouse,37.42
+2025-05-29,Robert Smith,Mechanical Keyboard,123.83
+2025-05-30,Steven Moore,Tablet Case,52.22
+2025-05-31,Daniel White,Tablet Case,19.83
+2025-05-31,David Lopez,Wireless Mouse,48.71
+2025-06-01,Brian Jackson,Wireless Mouse,49.44
+2025-06-02,Edward Harris,Tablet Case,38.29
+2025-06-02,Stephanie Jackson,Coffee Maker,148.88
+2025-06-02,Christopher Robinson,Portable Power Bank,61.74
+2025-06-03,Mary Williams,Water Bottle,33.87
+2025-06-03,Donald Jones,Backpack,48.90
+2025-06-03,David Harris,Noise-Canceling Headphones,221.14
+2025-06-04,Betty Scott,Wireless Mouse,32.59
+2025-06-04,James Wright,Noise-Canceling Headphones,140.34
+2025-06-04,Charles Rodriguez,Smart Watch,283.08
+2025-06-04,Ashley Torres,Monitor Arm,75.80
+2025-06-05,Brian Sanchez,External Hard Drive,125.05
+2025-06-05,Jessica Taylor,Noise-Canceling Headphones,237.34
+2025-06-05,Karen Moore,Phone Charger,40.03
+2025-06-06,Mark Hill,Tablet Case,20.82
+2025-06-06,Linda Lopez,Backpack,90.87
+2025-06-06,George Anderson,Tablet Case,43.80
+2025-06-08,Deborah Perez,Desk Lamp,39.97
+2025-06-09,Charles Garcia,Monitor Arm,85.66
+2025-06-10,Patricia Brown,Air Purifier,161.04
+2025-06-10,Margaret Hill,Portable Power Bank,28.09
+2025-06-10,Andrew Ramirez,Air Purifier,148.74
+2025-06-10,Richard Hernandez,Phone Charger,44.85
+2025-06-10,Margaret Davis,USB-C Cable,22.46
+2025-06-11,David Thomas,External Hard Drive,143.79
+2025-06-11,Betty Lee,Water Bottle,23.57
+2025-06-12,Deborah Thompson,Air Purifier,84.79
+2025-06-12,Michelle Anderson,Air Purifier,97.69
+2025-06-13,Michael Perez,Noise-Canceling Headphones,110.26
+2025-06-13,George Thompson,Fitness Tracker,69.60
+2025-06-13,Susan White,Water Bottle,22.41
+2025-06-13,William Garcia,Water Bottle,23.39
+2025-06-14,Joshua Martinez,Laptop Stand,37.56
+2025-06-14,Michael Garcia,Water Bottle,29.82
+2025-06-14,Jessica Martin,Noise-Canceling Headphones,296.84
+2025-06-14,Steven Harris,Tablet Case,59.03
+2025-06-15,Christopher Perez,Monitor Arm,97.78
+2025-06-15,Patricia Johnson,Noise-Canceling Headphones,209.04
+2025-06-15,Joshua Brown,Electric Kettle,79.79
+2025-06-16,Barbara Young,Coffee Maker,93.54
+2025-06-16,Stephanie Torres,Electric Kettle,30.51
+2025-06-16,William Flores,Webcam,129.83
+2025-06-16,Kevin Walker,Portable Power Bank,46.37
+2025-06-16,Richard Robinson,USB-C Cable,12.45
+2025-06-16,Sarah King,Webcam,140.05
+2025-06-17,Deborah Clark,Smart Watch,150.19
+2025-06-17,Donna Smith,Laptop Stand,73.85
+2025-06-17,Elizabeth Garcia,Desk Lamp,78.09
+2025-06-18,Amanda Wright,Fitness Tracker,193.11
+2025-06-18,David King,Laptop Stand,68.75
+2025-06-18,Joseph Harris,Air Purifier,221.66
+2025-06-18,Mark Perez,Tablet Case,51.32
+2025-06-19,Paul Robinson,Tablet Case,15.92
+2025-06-19,Margaret Miller,Wireless Mouse,27.46
+2025-06-19,Brian Thomas,Bluetooth Speaker,107.11
+2025-06-19,Lisa Taylor,Air Purifier,129.98
+2025-06-20,Stephanie Rodriguez,External Hard Drive,81.00
+2025-06-20,Anthony Thomas,External Hard Drive,80.69
+2025-06-20,David Williams,Backpack,76.86
+2025-06-20,Donald King,Webcam,47.86
+2025-06-22,Michael Garcia,Fitness Tracker,64.50
+2025-06-22,Stephanie Flores,Noise-Canceling Headphones,211.38
+2025-06-22,Christopher Torres,Coffee Maker,63.95
+2025-06-22,Sarah Lee,External Hard Drive,93.94
+2025-06-22,Margaret Rodriguez,Water Bottle,39.87
+2025-06-23,Michael Thomas,Coffee Maker,66.37
+2025-06-23,Linda Robinson,Laptop Stand,38.44
+2025-06-24,Sarah Martinez,Coffee Maker,192.93
+2025-06-24,James Clark,Phone Charger,13.68
+2025-06-25,Melissa Garcia,Portable Power Bank,65.22
+2025-06-25,Barbara Davis,Fitness Tracker,110.03
+2025-06-25,Christopher Lewis,Noise-Canceling Headphones,110.39
+2025-06-26,Joshua Taylor,Bluetooth Speaker,105.67
+2025-06-26,Donna Martin,Tablet Case,45.43
+2025-06-26,David Scott,Air Purifier,110.92
+2025-06-26,Karen Rodriguez,USB-C Cable,14.51
+2025-06-26,Susan Clark,Portable Power Bank,29.96
+2025-06-26,Ashley Walker,Electric Kettle,25.42
+2025-06-27,Patricia Miller,Tablet Case,23.90
+2025-06-27,Kimberly King,External Hard Drive,81.70
+2025-06-28,Sandra Taylor,Coffee Maker,112.00
+2025-06-29,Joseph Jones,Bluetooth Speaker,107.87
+2025-06-29,Emily White,USB-C Cable,20.95
+2025-06-29,Paul Harris,USB-C Cable,22.08
+2025-06-30,Steven Jones,Mechanical Keyboard,110.02
+2025-06-30,Michelle Ramirez,External Hard Drive,143.12
+2025-06-30,Patricia Brown,Mechanical Keyboard,114.33
+2025-06-30,William Rodriguez,Monitor Arm,88.82
+2025-07-01,Margaret Clark,Webcam,133.65
+2025-07-03,Melissa Clark,Mechanical Keyboard,70.84
+2025-07-03,Michelle Johnson,Noise-Canceling Headphones,186.27
+2025-07-03,Stephanie Martin,Phone Charger,29.30
+2025-07-04,Brian Wright,Electric Kettle,66.47
+2025-07-04,Matthew Walker,Webcam,135.78
+2025-07-05,Kenneth Robinson,Noise-Canceling Headphones,175.80
+2025-07-05,Jennifer Ramirez,USB-C Cable,12.13
+2025-07-05,John Torres,USB-C Cable,9.04
+2025-07-06,William White,Backpack,44.89
+2025-07-06,George Rodriguez,Laptop Stand,84.57
+2025-07-06,Matthew Martinez,Smart Watch,332.78
+2025-07-06,Charles Ramirez,Smart Watch,101.20
+2025-07-07,Betty Lee,External Hard Drive,92.44
+2025-07-07,Edward Martinez,Coffee Maker,134.40
+2025-07-08,Amanda Taylor,Air Purifier,144.76
+2025-07-08,Margaret Sanchez,Webcam,137.35
+2025-07-08,Kimberly Moore,Laptop Stand,73.61
+2025-07-08,Richard Jackson,Air Purifier,213.36
+2025-07-09,Donna Scott,Noise-Canceling Headphones,174.54
+2025-07-09,Steven Scott,USB-C Cable,13.41
+2025-07-09,Jennifer Wright,Coffee Maker,43.49
+2025-07-09,Matthew White,Smart Watch,211.43
+2025-07-09,Joseph Williams,Coffee Maker,120.44
+2025-07-10,David Scott,Bluetooth Speaker,92.77
+2025-07-10,Mark Jones,Air Purifier,103.40
+2025-07-11,Elizabeth Walker,Laptop Stand,35.46
+2025-07-11,James Lee,Portable Power Bank,33.33
+2025-07-12,Betty Gonzalez,Laptop Stand,65.52
+2025-07-12,Margaret Lopez,Air Purifier,192.30
+2025-07-13,Sandra Lee,Coffee Maker,196.82
+2025-07-13,Amanda Hill,Electric Kettle,27.56
+2025-07-13,Emily Walker,Bluetooth Speaker,97.30
+2025-07-13,John Lewis,Electric Kettle,56.14
+2025-07-13,Betty Thomas,Laptop Stand,57.54
+2025-07-14,Sarah Clark,External Hard Drive,168.53
+2025-07-14,Betty Thompson,Noise-Canceling Headphones,143.89
+2025-07-15,Matthew Martinez,Phone Charger,43.76
+2025-07-15,Joshua King,Mechanical Keyboard,108.97
+2025-07-15,Mark Harris,Fitness Tracker,62.03
+2025-07-16,Margaret Lopez,Phone Charger,32.23
+2025-07-16,Jennifer Miller,USB-C Cable,13.32
+2025-07-16,James Williams,Monitor Arm,59.93
+2025-07-17,Matthew Hill,Webcam,93.48
+2025-07-17,Nancy Lopez,Phone Charger,34.21
+2025-07-17,Steven Lewis,Monitor Arm,67.96
+2025-07-18,Anthony Perez,Electric Kettle,28.39
+2025-07-18,Stephanie Garcia,Monitor Arm,130.51
+2025-07-18,Daniel Lopez,Smart Watch,159.13
+2025-07-18,Kimberly Clark,Monitor Arm,108.70
+2025-07-19,Thomas Robinson,Mechanical Keyboard,104.98
+2025-07-20,Donna Davis,Backpack,58.43
+2025-07-20,Donna Jones,Mechanical Keyboard,140.82
+2025-07-21,Steven Robinson,Desk Lamp,32.90
+2025-07-21,Michelle Martin,Air Purifier,137.17
+2025-07-21,Lisa Davis,Air Purifier,113.96
+2025-07-21,John Nguyen,Air Purifier,90.58
+2025-07-21,Paul Scott,Laptop Stand,48.27
+2025-07-22,James Taylor,Monitor Arm,52.35
+2025-07-22,Nancy Flores,Fitness Tracker,170.60
+2025-07-22,Steven Brown,Mechanical Keyboard,83.81
+2025-07-22,Ashley Johnson,Fitness Tracker,152.47
+2025-07-22,Melissa Williams,Portable Power Bank,59.98
+2025-07-23,Melissa Walker,Portable Power Bank,48.75
+2025-07-23,Stephanie Lee,Wireless Mouse,40.84
+2025-07-23,Charles Jackson,Phone Charger,43.86
+2025-07-23,Susan Ramirez,Coffee Maker,116.62
+2025-07-23,Steven Jackson,Portable Power Bank,73.69
+2025-07-24,Kevin White,Webcam,137.94
+2025-07-24,Amanda Wright,Water Bottle,38.17
+2025-07-25,Patricia Hernandez,Fitness Tracker,50.31
+2025-07-25,Steven Williams,Bluetooth Speaker,43.49
+2025-07-25,Kevin Miller,Smart Watch,345.41
+2025-07-25,Paul Allen,Tablet Case,38.54
+2025-07-25,John Robinson,Mechanical Keyboard,150.55
+2025-07-26,Steven Smith,Monitor Arm,86.19
+2025-07-26,Lisa Williams,Fitness Tracker,57.66
+2025-07-26,Mary Anderson,Desk Lamp,63.62
+2025-07-27,Amanda Allen,Mechanical Keyboard,139.73
+2025-07-28,Richard Miller,USB-C Cable,19.19
+2025-07-28,Jennifer Anderson,USB-C Cable,15.83
+2025-07-28,Deborah Young,Portable Power Bank,80.69
+2025-07-29,Charles Sanchez,Mechanical Keyboard,122.06
+2025-07-29,Andrew Jones,Noise-Canceling Headphones,293.91
+2025-07-29,Amanda Young,Tablet Case,46.37
+2025-07-29,Michael Taylor,Electric Kettle,37.72
+2025-07-30,Robert Lee,Phone Charger,34.67
+2025-07-30,Patricia Moore,Noise-Canceling Headphones,234.30
+2025-07-31,Nancy Walker,USB-C Cable,19.57
+2025-07-31,Edward Nguyen,Desk Lamp,53.21
+2025-08-01,Sandra Torres,Bluetooth Speaker,90.28
+2025-08-02,Joshua Hill,Electric Kettle,39.66
+2025-08-02,Anthony Martinez,Mechanical Keyboard,98.93
+2025-08-02,Emily King,Noise-Canceling Headphones,165.44
+2025-08-02,George Lee,External Hard Drive,167.37
+2025-08-03,Sandra Perez,Smart Watch,192.50
+2025-08-03,William Gonzalez,Electric Kettle,33.99
+2025-08-03,Kenneth Flores,Webcam,37.53
+2025-08-03,Jessica Hernandez,Water Bottle,38.00
+2025-08-03,William Clark,Phone Charger,40.85
+2025-08-03,Linda Clark,Noise-Canceling Headphones,112.59
+2025-08-04,Matthew Nguyen,Wireless Mouse,46.41
+2025-08-05,Robert Johnson,Laptop Stand,43.11
+2025-08-05,Susan Wright,Coffee Maker,152.63
+2025-08-05,Steven White,Wireless Mouse,34.05
+2025-08-05,Daniel Jones,Monitor Arm,139.40
+2025-08-05,Brian Rodriguez,Phone Charger,12.47
+2025-08-05,Brian Sanchez,Laptop Stand,68.42
+2025-08-05,James King,USB-C Cable,8.42
+2025-08-06,Michael Thomas,Mechanical Keyboard,163.72
+2025-08-08,Kevin White,Laptop Stand,60.35
+2025-08-08,Richard Rodriguez,Mechanical Keyboard,70.66
+2025-08-09,Barbara Rodriguez,Fitness Tracker,129.88
+2025-08-10,Deborah Lee,Electric Kettle,41.26
+2025-08-10,Donna Walker,Portable Power Bank,74.67
+2025-08-11,Michael Miller,Webcam,49.95
+2025-08-11,William Brown,USB-C Cable,13.62
+2025-08-11,Richard Martinez,Electric Kettle,41.75
+2025-08-12,Ashley Johnson,Fitness Tracker,100.41
+2025-08-12,Jennifer Anderson,Webcam,136.15
+2025-08-12,Kenneth Young,Water Bottle,15.22
+2025-08-13,Michelle Moore,Laptop Stand,52.35
+2025-08-13,Matthew Sanchez,Wireless Mouse,36.84
+2025-08-14,Michael King,Webcam,31.83
+2025-08-14,Charles Clark,Noise-Canceling Headphones,170.84
+2025-08-15,Emily Ramirez,Monitor Arm,40.96
+2025-08-15,Michelle Allen,Tablet Case,52.03
+2025-08-15,Anthony Moore,Coffee Maker,159.56
+2025-08-15,Kenneth Martin,External Hard Drive,136.87
+2025-08-15,Susan Garcia,USB-C Cable,10.37
+2025-08-15,Stephanie Lee,External Hard Drive,154.73
+2025-08-16,Daniel Lewis,Bluetooth Speaker,105.40
+2025-08-16,Jennifer Lee,Backpack,92.40
+2025-08-16,Ashley Hernandez,Laptop Stand,63.91
+2025-08-16,David Garcia,Water Bottle,13.67
+2025-08-17,Elizabeth Williams,Electric Kettle,65.24
+2025-08-17,Jessica Flores,Electric Kettle,40.84
+2025-08-17,Ashley Williams,Mechanical Keyboard,166.77
+2025-08-18,David Ramirez,Smart Watch,169.63
+2025-08-18,Joseph Wright,Desk Lamp,38.56
+2025-08-18,Emily Scott,Portable Power Bank,48.55
+2025-08-18,Barbara Hernandez,Coffee Maker,168.39
+2025-08-19,Ashley Anderson,Backpack,77.53
+2025-08-19,Sandra Nguyen,Portable Power Bank,29.41
+2025-08-20,Linda Thomas,Desk Lamp,23.83
+2025-08-20,Michael Flores,Monitor Arm,126.47
+2025-08-21,James Taylor,Portable Power Bank,73.33
+2025-08-22,Karen Gonzalez,Fitness Tracker,177.99
+2025-08-22,Susan King,Phone Charger,22.18
+2025-08-22,Christopher Taylor,Webcam,36.00
+2025-08-22,Sarah Harris,Phone Charger,37.99
+2025-08-23,Carol Taylor,Smart Watch,103.51
+2025-08-23,Michael Rodriguez,Mechanical Keyboard,50.87
+2025-08-23,Michelle Lopez,Mechanical Keyboard,169.42
+2025-08-23,Kenneth Thompson,Laptop Stand,77.73
+2025-08-25,Barbara Brown,External Hard Drive,109.27
+2025-08-25,Stephanie Jackson,Fitness Tracker,125.43
+2025-08-25,Melissa Wilson,Webcam,125.71
+2025-08-25,Joseph Sanchez,Smart Watch,146.59
+2025-08-25,Patricia Hernandez,Air Purifier,153.63
+2025-08-27,Mark Lewis,Coffee Maker,119.33
+2025-08-27,Brian Taylor,Backpack,40.93
+2025-08-27,Christopher Wright,Smart Watch,118.46
+2025-08-27,Linda Moore,Webcam,59.74
+2025-08-27,Charles Clark,USB-C Cable,17.10
+2025-08-28,Ashley Martin,Phone Charger,10.80
+2025-08-28,Sarah Gonzalez,USB-C Cable,13.61
+2025-08-29,Mary Wright,Bluetooth Speaker,129.98
+2025-08-29,Daniel Clark,Water Bottle,19.62
+2025-08-29,Richard White,Air Purifier,247.34
+2025-08-30,Jessica Robinson,Monitor Arm,54.45
+2025-08-30,Stephanie Jones,Wireless Mouse,39.67
+2025-08-30,Kimberly Thompson,Air Purifier,249.92
+2025-08-31,Donna Scott,Backpack,57.69
+2025-09-01,Donald Gonzalez,Mechanical Keyboard,91.74
+2025-09-01,Andrew Thomas,Phone Charger,20.45
+2025-09-02,Charles Thomas,Wireless Mouse,31.51
+2025-09-03,Mark Perez,Smart Watch,341.36
+2025-09-05,Sarah Nguyen,Portable Power Bank,61.77
+2025-09-05,Daniel Perez,Monitor Arm,116.28
+2025-09-05,Andrew Lewis,Smart Watch,252.82
+2025-09-06,Linda Johnson,Electric Kettle,76.95
+2025-09-06,Daniel Torres,Portable Power Bank,42.50
+2025-09-07,Linda Clark,Webcam,35.51
+2025-09-07,Nancy Thompson,Noise-Canceling Headphones,227.68
+2025-09-08,Charles Walker,Backpack,78.24
+2025-09-08,George Young,Webcam,50.18
+2025-09-08,Kimberly Lee,Electric Kettle,50.25
+2025-09-08,Joshua Lewis,Smart Watch,340.12
+2025-09-08,Edward Garcia,Noise-Canceling Headphones,215.18
+2025-09-08,Daniel Gonzalez,Smart Watch,337.01
+2025-09-09,Michael Smith,Air Purifier,128.33
+2025-09-10,Mark Garcia,Electric Kettle,27.58
+2025-09-10,Linda Miller,Desk Lamp,73.23
+2025-09-10,Stephanie Gonzalez,Monitor Arm,116.04
+2025-09-11,Emily Allen,USB-C Cable,17.73
+2025-09-12,Donna Martinez,Desk Lamp,47.66
+2025-09-12,Sandra Miller,Phone Charger,36.65
+2025-09-12,Elizabeth Perez,Laptop Stand,44.27
+2025-09-13,Betty Robinson,Noise-Canceling Headphones,138.26
+2025-09-13,Kenneth Lewis,Bluetooth Speaker,58.31
+2025-09-13,Joshua Wright,Wireless Mouse,40.79
+2025-09-13,Emily Perez,External Hard Drive,159.23
+2025-09-13,Kenneth Hill,Laptop Stand,61.69
+2025-09-13,James King,Bluetooth Speaker,89.78
+2025-09-14,Elizabeth Brown,Webcam,42.41
+2025-09-16,Joshua Johnson,Monitor Arm,59.87
+2025-09-16,Sandra White,Bluetooth Speaker,95.60
+2025-09-16,Betty Davis,Wireless Mouse,31.04
+2025-09-17,Michael Martin,Portable Power Bank,62.62
+2025-09-17,Sarah Smith,Mechanical Keyboard,144.38
+2025-09-17,Emily Johnson,Fitness Tracker,180.99
+2025-09-17,Betty Rodriguez,Portable Power Bank,81.54
+2025-09-18,Paul Young,Air Purifier,130.95
+2025-09-19,Mark Brown,Webcam,45.82
+2025-09-19,Matthew Clark,Electric Kettle,33.95
+2025-09-19,Lisa Brown,Phone Charger,40.07
+2025-09-19,Jennifer Sanchez,Backpack,72.70
+2025-09-20,Mary Smith,Phone Charger,41.89
+2025-09-21,Betty Wright,Phone Charger,18.86
+2025-09-21,David Lee,Electric Kettle,45.69
+2025-09-22,Andrew Flores,Noise-Canceling Headphones,106.45
+2025-09-23,Elizabeth Martin,Smart Watch,140.48
+2025-09-24,Joseph Clark,Mechanical Keyboard,85.76
+2025-09-24,John Allen,Smart Watch,203.97
+2025-09-24,Kenneth Moore,External Hard Drive,135.21
+2025-09-25,Carol Moore,Electric Kettle,77.52
+2025-09-25,Matthew Lewis,Webcam,65.67
+2025-09-27,Thomas Thompson,External Hard Drive,163.33
+2025-09-29,James Hill,Water Bottle,24.65
+2025-09-29,William Brown,Portable Power Bank,25.60
+2025-09-29,Daniel Ramirez,Monitor Arm,73.07
+2025-09-29,Anthony Torres,Smart Watch,142.49
+2025-09-30,Stephanie Rodriguez,Noise-Canceling Headphones,225.14
+2025-09-30,Emily Clark,Wireless Mouse,25.41
+2025-10-01,George Thomas,Smart Watch,215.56
+2025-10-01,Joseph Rodriguez,Fitness Tracker,169.51
+2025-10-02,Linda Harris,Laptop Stand,63.11
+2025-10-02,Edward Lopez,Coffee Maker,70.69
+2025-10-02,Betty Garcia,Backpack,46.00
+2025-10-03,Stephanie Walker,Webcam,82.26
+2025-10-03,Sarah Scott,External Hard Drive,77.84
+2025-10-03,Kevin Wilson,Desk Lamp,60.81
+2025-10-03,Betty King,Noise-Canceling Headphones,240.12
+2025-10-03,Donald Thomas,Desk Lamp,38.03
+2025-10-03,William Lee,Mechanical Keyboard,87.60
+2025-10-03,Michelle Martinez,External Hard Drive,70.86
+2025-10-04,Lisa King,Portable Power Bank,83.93
+2025-10-04,Nancy Harris,Noise-Canceling Headphones,253.90
+2025-10-04,Donald Martinez,Backpack,62.28
+2025-10-05,Carol Brown,Portable Power Bank,22.36
+2025-10-05,Daniel Smith,Water Bottle,10.03
+2025-10-06,Joseph Martinez,External Hard Drive,167.45
+2025-10-06,Kimberly Young,Noise-Canceling Headphones,267.22
+2025-10-06,Margaret Wright,Fitness Tracker,173.49
+2025-10-06,Mary Harris,Backpack,70.56
+2025-10-07,Joshua Anderson,Phone Charger,17.67
+2025-10-07,Barbara Scott,Wireless Mouse,48.82
+2025-10-07,Christopher Martinez,Mechanical Keyboard,138.04
+2025-10-08,Mark Hernandez,Phone Charger,25.74
+2025-10-08,Steven Gonzalez,Air Purifier,171.22
+2025-10-08,Ashley Wilson,Phone Charger,21.56
+2025-10-08,Charles Scott,Coffee Maker,68.14
+2025-10-09,William Taylor,Portable Power Bank,81.06
+2025-10-09,David Jackson,Webcam,135.69
+2025-10-09,Paul Jackson,Mechanical Keyboard,160.67
+2025-10-09,Jessica Miller,Webcam,42.22
+2025-10-09,Donald Brown,Laptop Stand,46.78
+2025-10-09,Sandra Scott,Laptop Stand,47.43
+2025-10-10,John Hernandez,Wireless Mouse,35.20
+2025-10-10,David Flores,Laptop Stand,33.93
+2025-10-10,Charles Jackson,Fitness Tracker,119.93
+2025-10-10,William Perez,Monitor Arm,82.63
+2025-10-11,James Davis,Monitor Arm,115.08
+2025-10-11,Susan Nguyen,Coffee Maker,169.14
+2025-10-12,Kevin Young,Noise-Canceling Headphones,121.77
+2025-10-13,Amanda Harris,Mechanical Keyboard,82.75
+2025-10-13,Donna Lopez,Tablet Case,39.11
+2025-10-13,Michelle Brown,Wireless Mouse,41.07
+2025-10-14,Anthony Flores,Noise-Canceling Headphones,283.66
+2025-10-15,Emily Perez,USB-C Cable,14.97
+2025-10-15,Linda Taylor,External Hard Drive,151.51
+2025-10-15,Richard White,Monitor Arm,68.85
+2025-10-15,Brian Flores,Backpack,46.20
+2025-10-15,Edward Smith,USB-C Cable,19.36
+2025-10-16,Karen Garcia,Desk Lamp,27.10
+2025-10-16,Edward Nguyen,Webcam,111.73
+2025-10-16,Robert Johnson,Laptop Stand,32.72
+2025-10-16,Joseph Martinez,Wireless Mouse,31.51
+2025-10-16,Jessica Torres,Fitness Tracker,151.55
+2025-10-17,Carol Flores,Water Bottle,35.92
+2025-10-17,Ashley Perez,Bluetooth Speaker,44.12
+2025-10-17,Kevin Martinez,Phone Charger,42.86
+2025-10-18,Jennifer Garcia,Phone Charger,38.55
+2025-10-19,Michelle Harris,Water Bottle,10.85
+2025-10-19,Christopher Lewis,USB-C Cable,15.96
+2025-10-19,Anthony White,Monitor Arm,108.28
+2025-10-19,Sandra Martinez,Water Bottle,35.86
+2025-10-19,Barbara Harris,Fitness Tracker,104.78
+2025-10-20,Andrew Walker,Desk Lamp,67.07
+2025-10-20,Carol Gonzalez,Water Bottle,28.14
+2025-10-20,Anthony Flores,Wireless Mouse,37.44
+2025-10-20,Lisa Davis,Portable Power Bank,67.12
+2025-10-20,Emily Young,Noise-Canceling Headphones,91.98
+2025-10-21,Joseph Ramirez,Monitor Arm,137.44
+2025-10-21,James Taylor,Backpack,90.80
+2025-10-21,Amanda Davis,Desk Lamp,64.44
+2025-10-21,Betty Torres,Bluetooth Speaker,56.38
+2025-10-21,Mark Garcia,Phone Charger,25.64
+2025-10-22,Matthew Walker,Wireless Mouse,48.56
+2025-10-22,Jessica Martinez,Mechanical Keyboard,105.79
+2025-10-22,Charles Torres,Electric Kettle,75.20
+2025-10-22,Joseph Lewis,Backpack,62.15
+2025-10-22,Joseph Taylor,Tablet Case,31.23
+2025-10-23,Richard Taylor,Bluetooth Speaker,103.78
+2025-10-23,Carol Anderson,Smart Watch,212.81
+2025-10-25,Emily Williams,Webcam,139.08
+2025-10-26,Andrew King,Water Bottle,38.03
+2025-10-26,Karen Johnson,Electric Kettle,55.84
+2025-10-26,Melissa Torres,Coffee Maker,91.61
+2025-10-26,Andrew Clark,Monitor Arm,68.58
+2025-10-27,Margaret Nguyen,Fitness Tracker,104.29
+2025-10-27,Donna Clark,Mechanical Keyboard,69.80
+2025-10-27,Michael Martinez,USB-C Cable,10.78
+2025-10-28,Donna Young,Noise-Canceling Headphones,178.23
+2025-10-28,Elizabeth Sanchez,Laptop Stand,47.95
+2025-10-29,Sarah Smith,Smart Watch,274.52
+2025-10-29,Margaret Martin,Air Purifier,185.56
+2025-10-29,Betty King,Laptop Stand,53.74
+2025-10-29,Brian Thompson,Electric Kettle,66.12
+2025-10-29,Barbara Harris,Mechanical Keyboard,145.41
+2025-10-29,Donna Miller,USB-C Cable,17.56
+2025-10-29,Karen Hernandez,Laptop Stand,79.42
+2025-10-29,George Jackson,Noise-Canceling Headphones,182.22
+2025-10-30,Jennifer Rodriguez,Water Bottle,13.53
+2025-10-30,Susan Williams,Monitor Arm,66.05
+2025-10-31,Sarah Lee,Desk Lamp,69.83
+2025-11-01,Robert Flores,Laptop Stand,55.14
+2025-11-02,Mary Brown,Water Bottle,17.30
+2025-11-02,Jennifer King,Webcam,93.37
+2025-11-03,Charles Harris,Wireless Mouse,32.29
+2025-11-04,Linda Torres,Bluetooth Speaker,71.24
+2025-11-04,Karen Thompson,USB-C Cable,17.81
+2025-11-05,Brian Allen,Mechanical Keyboard,159.59
+2025-11-05,Richard Gonzalez,Mechanical Keyboard,108.34
+2025-11-06,Susan Perez,Coffee Maker,148.43
+2025-11-06,Margaret Miller,USB-C Cable,22.49
+2025-11-06,Carol Garcia,Coffee Maker,107.87
+2025-11-06,Michelle Martin,Portable Power Bank,59.35
+2025-11-07,Deborah Davis,Smart Watch,341.17
+2025-11-07,Lisa Clark,Monitor Arm,131.27
+2025-11-07,Steven Gonzalez,Fitness Tracker,94.32
+2025-11-08,Amanda Sanchez,Bluetooth Speaker,75.61
+2025-11-08,Karen Moore,Tablet Case,55.08
+2025-11-08,Christopher Martin,USB-C Cable,16.18
+2025-11-08,Richard Taylor,Portable Power Bank,88.11
+2025-11-09,Stephanie Jones,Webcam,79.72
+2025-11-09,Deborah Miller,Coffee Maker,138.20
+2025-11-09,William White,Backpack,112.19
+2025-11-09,Carol Hernandez,Webcam,72.13
+2025-11-10,Robert Torres,Fitness Tracker,195.01
+2025-11-11,Daniel Thomas,Air Purifier,150.81
+2025-11-11,Richard Rodriguez,Water Bottle,31.50
+2025-11-12,Deborah Nguyen,Desk Lamp,34.54
+2025-11-13,Michael Ramirez,Desk Lamp,48.91
+2025-11-13,John Nguyen,Bluetooth Speaker,103.07
+2025-11-14,Emily Lee,Electric Kettle,39.38
+2025-11-14,Stephanie Harris,Noise-Canceling Headphones,260.76
+2025-11-14,Patricia Thompson,Wireless Mouse,37.11
+2025-11-14,John Walker,Coffee Maker,117.57
+2025-11-14,Joshua Walker,Backpack,93.00
+2025-11-15,Paul Johnson,Fitness Tracker,138.77
+2025-11-15,Michelle Scott,Wireless Mouse,40.21
+2025-11-15,Jessica Robinson,Backpack,81.20
+2025-11-16,Kenneth Nguyen,Monitor Arm,111.21
+2025-11-16,Amanda Flores,USB-C Cable,10.18
+2025-11-16,Melissa Jackson,Backpack,112.50
+2025-11-17,Melissa Young,Monitor Arm,43.58
+2025-11-17,Karen Flores,Monitor Arm,49.33
+2025-11-17,Sandra Johnson,USB-C Cable,23.79
+2025-11-17,Joshua Walker,Coffee Maker,50.99
+2025-11-17,John Jones,Wireless Mouse,46.23
+2025-11-18,Michelle White,Air Purifier,112.68
+2025-11-18,Jessica Miller,Mechanical Keyboard,160.53
+2025-11-18,Charles Martinez,Webcam,38.18
+2025-11-18,Paul Jackson,Mechanical Keyboard,112.77
+2025-11-19,Andrew Gonzalez,Fitness Tracker,124.15
+2025-11-19,Joseph Jones,Noise-Canceling Headphones,82.00
+2025-11-19,Carol Garcia,Air Purifier,179.63
+2025-11-19,James Martin,Tablet Case,44.09
+2025-11-19,Betty Ramirez,Water Bottle,10.50
+2025-11-20,Carol Perez,Laptop Stand,49.77
+2025-11-20,Mary Nguyen,Air Purifier,148.86
+2025-11-21,Michelle Perez,Laptop Stand,79.10
+2025-11-21,Mary Garcia,Portable Power Bank,35.05
+2025-11-21,Elizabeth Harris,Water Bottle,20.81
+2025-11-21,Stephanie Garcia,Fitness Tracker,127.33
+2025-11-21,Margaret Sanchez,Tablet Case,58.36
+2025-11-21,Christopher Scott,Portable Power Bank,46.16
+2025-11-21,Melissa White,Air Purifier,172.91
+2025-11-23,Lisa Miller,Desk Lamp,48.28
+2025-11-23,Charles Davis,Backpack,78.41
+2025-11-24,Linda Johnson,External Hard Drive,91.83
+2025-11-24,Anthony Jackson,USB-C Cable,14.88
+2025-11-24,Betty Ramirez,Portable Power Bank,42.94
+2025-11-24,Christopher White,Electric Kettle,39.35
+2025-11-25,Nancy Davis,Mechanical Keyboard,106.51
+2025-11-25,John Lewis,Webcam,111.60
+2025-11-25,William Nguyen,Air Purifier,106.20
+2025-11-25,Stephanie Torres,External Hard Drive,144.64
+2025-11-26,Barbara Robinson,Phone Charger,32.10
+2025-11-26,Sarah Wilson,Noise-Canceling Headphones,121.11
+2025-11-27,Robert Martin,Webcam,33.99
+2025-11-27,Daniel Brown,Fitness Tracker,91.37
+2025-11-27,Elizabeth Thomas,USB-C Cable,10.48
+2025-11-27,Lisa White,Fitness Tracker,192.41
+2025-11-27,Patricia Garcia,Air Purifier,119.47
+2025-11-27,Nancy Torres,USB-C Cable,23.20
+2025-11-28,Richard Jackson,Backpack,106.89
+2025-11-28,Michael Hernandez,Desk Lamp,50.95
+2025-11-28,Joseph Wilson,External Hard Drive,144.70
+2025-11-28,Barbara Hill,Wireless Mouse,30.58
+2025-11-28,Emily Harris,Desk Lamp,50.65
+2025-11-28,Lisa Smith,Monitor Arm,127.47
+2025-11-29,Brian Wright,Tablet Case,23.35
+2025-11-29,Daniel Martin,External Hard Drive,106.74
+2025-11-29,Edward Williams,Laptop Stand,54.31
+2025-11-29,William Davis,Noise-Canceling Headphones,233.15
+2025-11-30,Paul Smith,Laptop Stand,85.57
+2025-11-30,Stephanie Scott,Coffee Maker,105.95
+2025-11-30,Joshua Rodriguez,Mechanical Keyboard,91.68
+2025-12-01,Kimberly Smith,Monitor Arm,69.93
+2025-12-01,Amanda Walker,Mechanical Keyboard,119.76
+2025-12-01,John King,External Hard Drive,108.91
+2025-12-02,John Lopez,Phone Charger,26.23
+2025-12-02,Stephanie Nguyen,Air Purifier,118.67
+2025-12-02,Thomas Walker,Coffee Maker,68.33
+2025-12-02,Kevin Robinson,Water Bottle,20.89
+2025-12-03,Brian Moore,Wireless Mouse,29.50
+2025-12-03,Joshua Martinez,Water Bottle,12.44
+2025-12-03,Kenneth Miller,Air Purifier,204.97
+2025-12-03,Margaret Sanchez,Wireless Mouse,43.42
+2025-12-03,Matthew Martin,USB-C Cable,11.48
+2025-12-03,Emily Lopez,Mechanical Keyboard,62.68
+2025-12-04,Betty Moore,Wireless Mouse,39.14
+2025-12-04,Amanda Rodriguez,USB-C Cable,23.35
+2025-12-04,Michelle Hill,Water Bottle,35.27
+2025-12-04,Karen Nguyen,Noise-Canceling Headphones,204.41
+2025-12-05,Paul Rodriguez,Backpack,36.26
+2025-12-05,Thomas Garcia,Monitor Arm,78.74
+2025-12-06,Michael Rodriguez,External Hard Drive,75.00
+2025-12-06,Mary Garcia,Tablet Case,19.37
+2025-12-06,Elizabeth Thompson,Mechanical Keyboard,175.79
+2025-12-06,David Thomas,Mechanical Keyboard,83.92
+2025-12-06,Kimberly Moore,Electric Kettle,64.36
+2025-12-06,Amanda Harris,Noise-Canceling Headphones,264.58
+2025-12-06,Jessica Flores,Smart Watch,289.29
+2025-12-07,Edward Ramirez,Bluetooth Speaker,127.15
+2025-12-07,Kevin Garcia,Portable Power Bank,88.22
+2025-12-07,Carol Hernandez,Bluetooth Speaker,75.66
+2025-12-08,Kimberly Scott,Electric Kettle,45.61
+2025-12-08,Michelle Walker,Phone Charger,10.54
+2025-12-08,Deborah Lopez,USB-C Cable,8.21
+2025-12-08,Michael Garcia,Backpack,101.77
+2025-12-09,Ashley Wilson,Monitor Arm,53.22
+2025-12-09,Kimberly Anderson,Desk Lamp,23.14
+2025-12-09,Ashley Martinez,Laptop Stand,76.76
+2025-12-09,Nancy King,Portable Power Bank,68.17
+2025-12-10,Daniel Allen,Mechanical Keyboard,159.89
+2025-12-11,Sarah Torres,Bluetooth Speaker,108.67
+2025-12-11,Karen Johnson,Fitness Tracker,88.16
+2025-12-11,Linda Wright,Wireless Mouse,41.03
+2025-12-13,George Thomas,Webcam,103.26
+2025-12-13,Stephanie Taylor,Electric Kettle,56.46
+2025-12-13,Betty Young,Noise-Canceling Headphones,207.02
+2025-12-13,Elizabeth Jones,Portable Power Bank,59.42
+2025-12-13,Kimberly Flores,Fitness Tracker,137.66
+2025-12-13,James Thomas,Desk Lamp,61.60
+2025-12-14,Betty Hernandez,Webcam,140.33
+2025-12-14,Donna Young,Portable Power Bank,66.69
+2025-12-14,William Johnson,Noise-Canceling Headphones,266.70
+2025-12-14,Mark Williams,Noise-Canceling Headphones,94.78
+2025-12-14,Donna Allen,Noise-Canceling Headphones,155.88
+2025-12-14,Kimberly Torres,Air Purifier,118.07
+2025-12-15,David Johnson,Phone Charger,44.90
+2025-12-15,Matthew King,Mechanical Keyboard,103.69
+2025-12-16,John Lopez,Smart Watch,283.76
+2025-12-17,Betty Martin,Webcam,38.75
+2025-12-17,Michael Anderson,Noise-Canceling Headphones,146.10
+2025-12-17,Charles Scott,Bluetooth Speaker,41.16
+2025-12-18,Stephanie Brown,Electric Kettle,73.43
+2025-12-18,Karen Hill,Laptop Stand,46.88
+2025-12-19,Joshua Walker,Mechanical Keyboard,54.23
+2025-12-19,George Garcia,Portable Power Bank,72.17
+2025-12-20,Christopher Wilson,Monitor Arm,43.22
+2025-12-21,John Clark,Phone Charger,14.86
+2025-12-21,Edward Thomas,External Hard Drive,111.71
+2025-12-22,Richard Walker,Water Bottle,15.32
+2025-12-22,Carol Lopez,Monitor Arm,56.68
+2025-12-23,Paul Clark,Air Purifier,206.18
+2025-12-23,Joshua Wilson,Fitness Tracker,187.26
+2025-12-23,Joseph Martin,Laptop Stand,69.21
+2025-12-23,Joshua Williams,Coffee Maker,172.92
+2025-12-23,Christopher Brown,Fitness Tracker,108.12
+2025-12-24,Kevin Sanchez,Noise-Canceling Headphones,210.90
+2025-12-24,Amanda Ramirez,Smart Watch,126.74
+2025-12-25,Daniel Torres,Air Purifier,104.15
+2025-12-26,Michael Harris,Bluetooth Speaker,117.26
+2025-12-26,Sandra Moore,Mechanical Keyboard,82.67
+2025-12-26,Edward Martin,Water Bottle,20.52
+2025-12-26,William Garcia,Phone Charger,39.58
+2025-12-27,Susan Wilson,External Hard Drive,157.79
+2025-12-27,Michael Smith,Coffee Maker,113.66
+2025-12-27,Mary Ramirez,Smart Watch,251.82
+2025-12-27,Richard Moore,Backpack,103.22
+2025-12-29,Elizabeth Robinson,Bluetooth Speaker,90.60
+2025-12-29,Charles King,Desk Lamp,77.41
+2025-12-30,William Martin,Monitor Arm,41.36
+2025-12-30,Joseph Thompson,Portable Power Bank,82.63
+2025-12-31,Melissa Lopez,Backpack,73.32
+2025-12-31,Carol Martin,Coffee Maker,59.73

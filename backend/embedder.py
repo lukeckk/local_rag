@@ -1,6 +1,5 @@
 import os
 import pandas as pd
-from typing import List, Dict
 from pathlib import Path
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
@@ -62,13 +61,39 @@ class DocumentProcessor:
                 df = pd.read_csv(file_path)
             else:
                 df = pd.read_excel(file_path)
-            return df.to_string()
+            return self._table_to_text(df)
         else:
             raise ValueError(f"Unsupported file type: {ext}")
 
+    def _table_to_text(self, df: pd.DataFrame) -> str:
+        """
+        Convert tabular data to row-wise natural-language lines.
+        This retrieval-friendly format preserves column semantics better
+        than DataFrame.to_string() for RAG over CSV/Excel.
+        """
+        if df.empty:
+            return ""
+
+        normalized = df.fillna("")
+        lines: list[str] = []
+        for i, row in normalized.iterrows():
+            parts: list[str] = []
+            for col, value in row.items():
+                col_name = str(col).strip()
+                val_text = str(value).strip()
+                parts.append(f"{col_name}: {val_text}")
+            lines.append(f"Row {i + 1} | " + " | ".join(parts))
+        return "\n".join(lines)
+
     def process_and_index(self, file_path: Path, filename: str):
         content = self.extract_text(file_path)
-        splits = self.splitter.split_text(content)
+        ext = file_path.suffix.lower()
+        if ext in [".csv", ".xlsx", ".xls"]:
+            # Keep each table row as an independent chunk to avoid
+            # mixing neighboring records during retrieval.
+            splits = [line for line in content.splitlines() if line.strip()]
+        else:
+            splits = self.splitter.split_text(content)
         
         points = []
         for i, text in enumerate(splits):

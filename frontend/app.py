@@ -3,12 +3,40 @@ SG-ComplianceGuard — Streamlit Frontend
 """
 
 import os
+import json
+from pathlib import Path
 from urllib.parse import quote
 import httpx
 import streamlit as st
 
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
 MAX_HISTORY_MESSAGES = 1000
+CHAT_HISTORY_FILE = Path(__file__).resolve().parent / ".chat_history.json"
+
+
+def load_persisted_history() -> list[dict]:
+    if not CHAT_HISTORY_FILE.exists():
+        return []
+    try:
+        data = json.loads(CHAT_HISTORY_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    if not isinstance(data, list):
+        return []
+    cleaned: list[dict] = []
+    for item in data:
+        if not isinstance(item, dict):
+            continue
+        question = item.get("question")
+        answer = item.get("answer")
+        sources = item.get("sources", [])
+        if isinstance(question, str) and isinstance(answer, str) and isinstance(sources, list):
+            cleaned.append({"question": question, "answer": answer, "sources": sources})
+    return cleaned
+
+
+def persist_history(history: list[dict]) -> None:
+    CHAT_HISTORY_FILE.write_text(json.dumps(history, ensure_ascii=True), encoding="utf-8")
 
 # ---------------------------------------------------------------------------
 # Page config
@@ -43,7 +71,7 @@ st.divider()
 # Session state
 # ---------------------------------------------------------------------------
 if "history" not in st.session_state:
-    st.session_state.history = []
+    st.session_state.history = load_persisted_history()
 
 # ---------------------------------------------------------------------------
 # Sidebar — File Upload
@@ -99,20 +127,6 @@ with st.sidebar:
                         st.error(f"Delete failed: {e}")
 
     st.divider()
-    st.markdown("**Stack**")
-    st.markdown(
-        "- 🔍 Qdrant (vector DB)\n"
-        "- 🤗 all-MiniLM-L6-v2 (embeddings)\n"
-        "- 🦙 local LLM via Ollama\n"
-        "- ⚡ FastAPI backend\n"
-        "- 🔒 100% local — PDPA compliant"
-    )
-    st.divider()
-    if st.button("Clear chat history", use_container_width=True):
-        st.session_state.history = []
-        st.rerun()
-
-    st.divider()
     st.header("💬 Conversation History")
     if not st.session_state.history:
         st.caption("No messages yet.")
@@ -122,6 +136,22 @@ with st.sidebar:
             if len(preview) > 55:
                 preview = preview[:55] + "..."
             st.caption(f"{idx}. {preview}")
+
+    st.divider()
+    if st.button("Clear chat history", use_container_width=True):
+        st.session_state.history = []
+        persist_history(st.session_state.history)
+        st.rerun()
+
+    st.divider()
+    st.markdown("**Stack**")
+    st.markdown(
+        "- 🔍 Qdrant (vector DB)\n"
+        "- 🤗 all-MiniLM-L6-v2 (embeddings)\n"
+        "- 🦙 local LLM via Ollama\n"
+        "- ⚡ FastAPI backend\n"
+        "- 🔒 100% local — PDPA compliant"
+    )
 
 # ---------------------------------------------------------------------------
 # Chat transcript
@@ -178,6 +208,7 @@ if question and question.strip():
                 "answer": data["answer"],
                 "sources": data["sources"],
             })
+            persist_history(st.session_state.history)
             st.rerun()
         except httpx.ConnectError:
             st.error("Cannot connect to the backend. Make sure the FastAPI server is running.")

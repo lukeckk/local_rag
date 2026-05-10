@@ -1,6 +1,7 @@
 import logging
 from contextlib import asynccontextmanager
 from typing import Any, Literal
+import re
 import httpx
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from pydantic import BaseModel, Field
@@ -29,6 +30,7 @@ OLLAMA_TIMEOUT = 120.0
 MIN_VECTOR_SCORE = 0.18
 MAX_HISTORY_MESSAGES = 1000
 MAX_HISTORY_MESSAGES_IN_PROMPT = 40
+TABLE_CONTEXT_LIMIT = 30
 
 # Global state
 _state: dict[str, Any] = {}
@@ -125,6 +127,102 @@ def _keyword_search(query: str, limit: int) -> list[dict]:
         {"id": r.id, "score": 0.0, "payload": r.payload}
         for r in results[0]
     ]
+
+
+def _extract_purchase_lookup(question: str) -> tuple[str | None, str | None]:
+    year_match = re.search(r"\b(20\d{2})\b", question)
+    year = year_match.group(1) if year_match else None
+
+    name_patterns = [
+        r"what did (.+?) purchase",
+        r"purchases? by (.+?)(?: in|$)",
+        r"what has (.+?) purchased",
+    ]
+    candidate_name = None
+    for pattern in name_patterns:
+        match = re.search(pattern, question, flags=re.IGNORECASE)
+        if match:
+            candidate_name = match.group(1).strip(" ?!.,")
+            break
+
+    if not candidate_name:
+        return None, year
+
+    words = [w for w in candidate_name.split() if w]
+    if len(words) < 2 or len(words) > 4:
+        return None, year
+    normalized_name = " ".join(w.capitalize() for w in words)
+    return normalized_name, year
+
+
+def _table_purchase_lookup(customer_name: str, year: str | None) -> list[dict]:
+    must_conditions = [
+        FieldCondition(key="text", match=MatchText(text=f"customer name: {customer_name}"))
+    ]
+    if year:
+        must_conditions.append(
+            FieldCondition(key="text", match=MatchText(text=f"date: {year}-"))
+        )
+
+    offset = None
+    collected: list[dict] = []
+    while True:
+        points, next_offset = _state["qdrant"].scroll(
+            collection_name=COLLECTION_NAME,
+            scroll_filter=Filter(must=must_conditions),
+            limit=128,
+            offset=offset,
+            with_payload=True,
+            with_vectors=False,
+        )
+        for point in points:
+            collected.append({"id": point.id, "score": 1.0, "payload": point.payload or {}})
+        if next_offset is None:
+            break
+        offset = next_offset
+
+    def row_number(hit: dict) -> int:
+        text = hit.get("payload", {}).get("text", "")
+        row_match = re.search(r"Row\s+(\d+)\s+\|", text)
+        return int(row_match.group(1)) if row_match else 10**9
+
+    collected.sort(key=row_number)
+    return collected
+
+
+def _parse_table_row(text: str) -> dict[str, str]:
+    record: dict[str, str] = {}
+    for part in [p.strip() for p in text.split("|")]:
+        row_match = re.match(r"Row\s+(\d+)$", part)
+        if row_match:
+            record["row"] = row_match.group(1)
+            continue
+        if ":" in part:
+            key, value = part.split(":", 1)
+            record[key.strip().lower()] = value.strip()
+    return record
+
+
+def _build_purchase_answer(customer_name: str, year: str | None, hits: list[dict]) -> str:
+    rows = []
+    for hit in hits:
+        record = _parse_table_row(hit.get("payload", {}).get("text", ""))
+        if record:
+            rows.append(record)
+
+    if not rows:
+        scope = f"in {year}" if year else "in the indexed data"
+        return f"I couldn't find purchases for {customer_name} {scope}."
+
+    year_text = f" in {year}" if year else ""
+    lines = [f"{customer_name} made {len(rows)} purchase(s){year_text}:"]
+    for row in rows:
+        date = row.get("date", "unknown date")
+        product = row.get("product", "unknown product")
+        price = row.get("price", "unknown price")
+        row_no = row.get("row", "?")
+        lines.append(f"- {date}: {product} (${price}) [Row {row_no}]")
+    return "\n".join(lines)
 
 
 def _list_documents() -> list[DocumentSummary]:
@@ -279,23 +377,49 @@ async def query(req: QueryRequest):
 
     logger.info(f"Query: {req.question!r}")
 
+    table_lookup_name, table_lookup_year = _extract_purchase_lookup(req.question)
+
     if _should_skip_retrieval(req.question):
         vector_hits = []
         fused = []
     else:
-        vector = _embed(req.question)
-        vector_hits = _vector_search(vector, limit=TOP_K * 2)
-        keyword_hits = _keyword_search(req.question, limit=TOP_K * 2)
-        fused = _reciprocal_rank_fusion(vector_hits, keyword_hits)
+        table_hits = []
+        if table_lookup_name:
+            table_hits = _table_purchase_lookup(table_lookup_name, table_lookup_year)
+
+        if table_hits:
+            vector_hits = []
+            fused = table_hits[:TABLE_CONTEXT_LIMIT]
+            logger.info(
+                f"Using table lookup context for customer={table_lookup_name!r}, year={table_lookup_year!r}, hits={len(fused)}"
+            )
+        else:
+            vector = _embed(req.question)
+            vector_hits = _vector_search(vector, limit=TOP_K * 2)
+            keyword_hits = _keyword_search(req.question, limit=TOP_K * 2)
+            fused = _reciprocal_rank_fusion(vector_hits, keyword_hits)
 
     logger.info(f"Retrieved {len(fused)} chunks after fusion")
 
+    forced_table_context = bool(table_lookup_name and fused)
     top_vector_score = vector_hits[0]["score"] if vector_hits else 0.0
     has_relevant_context = bool(fused) and (
-        top_vector_score >= MIN_VECTOR_SCORE or _is_profile_query(req.question)
+        forced_table_context or top_vector_score >= MIN_VECTOR_SCORE or _is_profile_query(req.question)
     )
 
     prompt_context = fused if has_relevant_context else []
+    if forced_table_context and table_lookup_name:
+        sources = [
+            SourceDoc(
+                text=hit["payload"].get("text", ""),
+                source_url=hit["payload"].get("source_url", ""),
+                score=round(hit.get("score", 1.0), 4),
+            )
+            for hit in fused
+        ]
+        answer = _build_purchase_answer(table_lookup_name, table_lookup_year, fused)
+        return QueryResponse(answer=answer, sources=sources)
+
     prompt = _build_prompt(req.question, prompt_context, req.history)
     system_prompt = (
         "You are a document assistant. You DO have access to the provided CONTEXT block. "
@@ -306,17 +430,20 @@ async def query(req: QueryRequest):
     )
     answer = await _call_ollama(prompt, system_prompt=system_prompt)
 
-    seen_urls: set[str] = set()
     sources = []
     if has_relevant_context:
+        seen_source_blocks: set[tuple[str, str]] = set()
         for hit in fused:
             url = hit["payload"].get("source_url", "")
-            if url not in seen_urls:
-                seen_urls.add(url)
-                sources.append(SourceDoc(
-                    text=hit["payload"]["text"],
-                    source_url=url,
-                    score=round(hit["score"], 4),
-                ))
+            text = hit["payload"].get("text", "")
+            source_key = (url, text)
+            if source_key in seen_source_blocks:
+                continue
+            seen_source_blocks.add(source_key)
+            sources.append(SourceDoc(
+                text=text,
+                source_url=url,
+                score=round(hit["score"], 4),
+            ))
 
     return QueryResponse(answer=answer, sources=sources)
