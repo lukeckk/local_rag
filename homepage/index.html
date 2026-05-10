@@ -46,8 +46,13 @@
           <span class="step-number">2</span>
           <div>
             <h2>Start the app</h2>
-            <pre><code>cd /Users/lukecheng/rag_documents
+            <p>Use a repo-relative path (not a machine-specific username path):</p>
+            <pre><code>git clone &lt;your-repo-url&gt;
+cd rag_documents
 docker compose up -d --build</code></pre>
+            <p>If you publish prebuilt images, users can skip local builds:</p>
+            <pre><code>docker compose pull
+docker compose up -d</code></pre>
           </div>
         </article>
 

@@ -120,6 +120,30 @@ st.markdown(
     """
     <style>
     [data-testid="stAppDeployButton"] {display: none;}
+    :root {
+        --brand-blue: #2563eb;
+        --brand-blue-dark: #1d4ed8;
+    }
+    button[kind="primary"],
+    [data-testid="stBaseButton-primary"] {
+        background: var(--brand-blue) !important;
+        border-color: var(--brand-blue) !important;
+        color: #ffffff !important;
+    }
+    button[kind="primary"]:hover,
+    [data-testid="stBaseButton-primary"]:hover {
+        background: var(--brand-blue-dark) !important;
+        border-color: var(--brand-blue-dark) !important;
+    }
+    [data-testid="stChatMessageAvatarUser"] {
+        background: var(--brand-blue) !important;
+    }
+    [data-testid="stChatMessageAvatarAssistant"] {
+        background: #ef4444 !important;
+    }
+    a {
+        color: var(--brand-blue);
+    }
     [data-testid="stHeader"] {
         position: sticky;
         top: 0;
