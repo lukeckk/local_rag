@@ -155,6 +155,37 @@ def _extract_purchase_lookup(question: str) -> tuple[str | None, str | None]:
     return normalized_name, year
 
 
+def _extract_followup_name(question: str) -> str | None:
+    match = re.match(r"^\s*(?:what about|how about)\s+(.+?)\s*\??\s*$", question, flags=re.IGNORECASE)
+    if not match:
+        return None
+    candidate = match.group(1).strip(" ?!.,")
+    words = [w for w in candidate.split() if w]
+    if len(words) < 2 or len(words) > 4:
+        return None
+    return " ".join(w.capitalize() for w in words)
+
+
+def _expand_followup_question(question: str, history: list[ChatMessage]) -> str:
+    """
+    Reframe follow-ups like "what about Anthony Brown" using the most recent
+    user question intent (e.g., purchase lookup and year).
+    """
+    followup_name = _extract_followup_name(question)
+    if not followup_name:
+        return question
+
+    for msg in reversed(history):
+        if msg.role != "user":
+            continue
+        prev_name, prev_year = _extract_purchase_lookup(msg.content)
+        if prev_name:
+            if prev_year:
+                return f"What did {followup_name} purchase in {prev_year}?"
+            return f"What did {followup_name} purchase?"
+    return question
+
+
 def _table_purchase_lookup(customer_name: str, year: str | None) -> list[dict]:
     must_conditions = [
         FieldCondition(key="text", match=MatchText(text=f"customer name: {customer_name}"))
@@ -375,11 +406,12 @@ async def query(req: QueryRequest):
             detail=f"Message too long. Maximum supported history is {MAX_HISTORY_MESSAGES} messages.",
         )
 
-    logger.info(f"Query: {req.question!r}")
+    effective_question = _expand_followup_question(req.question, req.history)
+    logger.info(f"Query: {req.question!r} (effective={effective_question!r})")
 
-    table_lookup_name, table_lookup_year = _extract_purchase_lookup(req.question)
+    table_lookup_name, table_lookup_year = _extract_purchase_lookup(effective_question)
 
-    if _should_skip_retrieval(req.question):
+    if _should_skip_retrieval(effective_question):
         vector_hits = []
         fused = []
     else:
@@ -394,9 +426,9 @@ async def query(req: QueryRequest):
                 f"Using table lookup context for customer={table_lookup_name!r}, year={table_lookup_year!r}, hits={len(fused)}"
             )
         else:
-            vector = _embed(req.question)
+            vector = _embed(effective_question)
             vector_hits = _vector_search(vector, limit=TOP_K * 2)
-            keyword_hits = _keyword_search(req.question, limit=TOP_K * 2)
+            keyword_hits = _keyword_search(effective_question, limit=TOP_K * 2)
             fused = _reciprocal_rank_fusion(vector_hits, keyword_hits)
 
     logger.info(f"Retrieved {len(fused)} chunks after fusion")
@@ -404,7 +436,7 @@ async def query(req: QueryRequest):
     forced_table_context = bool(table_lookup_name and fused)
     top_vector_score = vector_hits[0]["score"] if vector_hits else 0.0
     has_relevant_context = bool(fused) and (
-        forced_table_context or top_vector_score >= MIN_VECTOR_SCORE or _is_profile_query(req.question)
+        forced_table_context or top_vector_score >= MIN_VECTOR_SCORE or _is_profile_query(effective_question)
     )
 
     prompt_context = fused if has_relevant_context else []

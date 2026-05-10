@@ -5,6 +5,8 @@ SG-ComplianceGuard — Streamlit Frontend
 import os
 import json
 from pathlib import Path
+from datetime import datetime, timezone
+from uuid import uuid4
 from urllib.parse import quote
 import httpx
 import streamlit as st
@@ -14,17 +16,18 @@ MAX_HISTORY_MESSAGES = 1000
 CHAT_HISTORY_FILE = Path(__file__).resolve().parent / ".chat_history.json"
 
 
-def load_persisted_history() -> list[dict]:
-    if not CHAT_HISTORY_FILE.exists():
-        return []
-    try:
-        data = json.loads(CHAT_HISTORY_FILE.read_text(encoding="utf-8"))
-    except Exception:
-        return []
-    if not isinstance(data, list):
-        return []
+def _new_session(title: str = "New chat") -> dict:
+    return {
+        "id": uuid4().hex[:12],
+        "title": title,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "history": [],
+    }
+
+
+def _normalize_history(raw_history: list) -> list[dict]:
     cleaned: list[dict] = []
-    for item in data:
+    for item in raw_history:
         if not isinstance(item, dict):
             continue
         question = item.get("question")
@@ -35,8 +38,73 @@ def load_persisted_history() -> list[dict]:
     return cleaned
 
 
-def persist_history(history: list[dict]) -> None:
-    CHAT_HISTORY_FILE.write_text(json.dumps(history, ensure_ascii=True), encoding="utf-8")
+def _question_to_title(question: str) -> str:
+    title = " ".join(question.strip().split())
+    if len(title) > 42:
+        title = title[:42] + "..."
+    return title or "New chat"
+
+
+def load_chat_store() -> dict:
+    if not CHAT_HISTORY_FILE.exists():
+        session = _new_session()
+        return {"active_session_id": session["id"], "sessions": [session]}
+
+    try:
+        data = json.loads(CHAT_HISTORY_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        session = _new_session()
+        return {"active_session_id": session["id"], "sessions": [session]}
+
+    # Backward compatibility: old format stored a single history list.
+    if isinstance(data, list):
+        session = _new_session("Imported chat")
+        session["history"] = _normalize_history(data)
+        return {"active_session_id": session["id"], "sessions": [session]}
+
+    if not isinstance(data, dict):
+        session = _new_session()
+        return {"active_session_id": session["id"], "sessions": [session]}
+
+    raw_sessions = data.get("sessions", [])
+    sessions: list[dict] = []
+    if isinstance(raw_sessions, list):
+        for raw in raw_sessions:
+            if not isinstance(raw, dict):
+                continue
+            session_id = str(raw.get("id") or uuid4().hex[:12])
+            title = str(raw.get("title") or "New chat")
+            created_at = str(raw.get("created_at") or datetime.now(timezone.utc).isoformat())
+            history = _normalize_history(raw.get("history", []))
+            sessions.append(
+                {
+                    "id": session_id,
+                    "title": title,
+                    "created_at": created_at,
+                    "history": history,
+                }
+            )
+
+    if not sessions:
+        session = _new_session()
+        return {"active_session_id": session["id"], "sessions": [session]}
+
+    active_session_id = str(data.get("active_session_id") or sessions[0]["id"])
+    if active_session_id not in {s["id"] for s in sessions}:
+        active_session_id = sessions[0]["id"]
+
+    return {"active_session_id": active_session_id, "sessions": sessions}
+
+
+def persist_chat_store(chat_store: dict) -> None:
+    CHAT_HISTORY_FILE.write_text(json.dumps(chat_store, ensure_ascii=True), encoding="utf-8")
+
+
+def get_active_session(chat_store: dict, active_session_id: str) -> dict:
+    for session in chat_store["sessions"]:
+        if session["id"] == active_session_id:
+            return session
+    return chat_store["sessions"][0]
 
 # ---------------------------------------------------------------------------
 # Page config
@@ -70,8 +138,14 @@ st.divider()
 # ---------------------------------------------------------------------------
 # Session state
 # ---------------------------------------------------------------------------
-if "history" not in st.session_state:
-    st.session_state.history = load_persisted_history()
+if "chat_store" not in st.session_state:
+    st.session_state.chat_store = load_chat_store()
+if "active_session_id" not in st.session_state:
+    st.session_state.active_session_id = st.session_state.chat_store["active_session_id"]
+
+active_session = get_active_session(st.session_state.chat_store, st.session_state.active_session_id)
+st.session_state.active_session_id = active_session["id"]
+st.session_state.chat_store["active_session_id"] = active_session["id"]
 
 # ---------------------------------------------------------------------------
 # Sidebar — File Upload
@@ -127,20 +201,45 @@ with st.sidebar:
                         st.error(f"Delete failed: {e}")
 
     st.divider()
-    st.header("💬 Conversation History")
-    if not st.session_state.history:
-        st.caption("No messages yet.")
-    else:
-        for idx, entry in enumerate(st.session_state.history[-12:], start=max(1, len(st.session_state.history) - 11)):
-            preview = entry["question"].strip().replace("\n", " ")
-            if len(preview) > 55:
-                preview = preview[:55] + "..."
-            st.caption(f"{idx}. {preview}")
+    st.header("💬 Conversations")
+    if st.button("＋ New chat", use_container_width=True):
+        new_session = _new_session()
+        st.session_state.chat_store["sessions"].insert(0, new_session)
+        st.session_state.active_session_id = new_session["id"]
+        st.session_state.chat_store["active_session_id"] = new_session["id"]
+        persist_chat_store(st.session_state.chat_store)
+        st.rerun()
+
+    for session in st.session_state.chat_store["sessions"]:
+        name_col, delete_col = st.columns([5, 1])
+        label_prefix = "● " if session["id"] == st.session_state.active_session_id else ""
+        label = f"{label_prefix}{session['title']}"
+        with name_col:
+            if st.button(label, key=f"open_{session['id']}", use_container_width=True):
+                st.session_state.active_session_id = session["id"]
+                st.session_state.chat_store["active_session_id"] = session["id"]
+                persist_chat_store(st.session_state.chat_store)
+                st.rerun()
+        with delete_col:
+            if st.button("🗑", key=f"delete_chat_{session['id']}", help="Delete this conversation"):
+                sessions = st.session_state.chat_store["sessions"]
+                if len(sessions) == 1:
+                    sessions[0]["history"] = []
+                    sessions[0]["title"] = "New chat"
+                    st.session_state.active_session_id = sessions[0]["id"]
+                else:
+                    st.session_state.chat_store["sessions"] = [s for s in sessions if s["id"] != session["id"]]
+                    if st.session_state.active_session_id == session["id"]:
+                        st.session_state.active_session_id = st.session_state.chat_store["sessions"][0]["id"]
+                st.session_state.chat_store["active_session_id"] = st.session_state.active_session_id
+                persist_chat_store(st.session_state.chat_store)
+                st.rerun()
 
     st.divider()
-    if st.button("Clear chat history", use_container_width=True):
-        st.session_state.history = []
-        persist_history(st.session_state.history)
+    if st.button("Clear current chat", use_container_width=True):
+        active_session["history"] = []
+        active_session["title"] = "New chat"
+        persist_chat_store(st.session_state.chat_store)
         st.rerun()
 
     st.divider()
@@ -156,7 +255,7 @@ with st.sidebar:
 # ---------------------------------------------------------------------------
 # Chat transcript
 # ---------------------------------------------------------------------------
-for entry in st.session_state.history:
+for entry in active_session["history"]:
     with st.chat_message("user"):
         st.markdown(entry["question"])
 
@@ -173,7 +272,7 @@ for entry in st.session_state.history:
                     if i < len(entry["sources"]) - 1:
                         st.markdown("---")
 
-if not st.session_state.history:
+if not active_session["history"]:
     st.info("Upload documents in the sidebar and ask a question above to get started.")
 
 # ---------------------------------------------------------------------------
@@ -183,7 +282,7 @@ question = st.chat_input("Ask a question about your documents...")
 
 if question and question.strip():
     history_payload = []
-    for turn in st.session_state.history:
+    for turn in active_session["history"]:
         history_payload.append({"role": "user", "content": turn["question"]})
         history_payload.append({"role": "assistant", "content": turn["answer"]})
 
@@ -203,12 +302,14 @@ if question and question.strip():
             )
             resp.raise_for_status()
             data = resp.json()
-            st.session_state.history.append({
+            active_session["history"].append({
                 "question": question.strip(),
                 "answer": data["answer"],
                 "sources": data["sources"],
             })
-            persist_history(st.session_state.history)
+            if active_session["title"] == "New chat":
+                active_session["title"] = _question_to_title(question)
+            persist_chat_store(st.session_state.chat_store)
             st.rerun()
         except httpx.ConnectError:
             st.error("Cannot connect to the backend. Make sure the FastAPI server is running.")
