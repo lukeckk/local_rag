@@ -1,104 +1,107 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Local RAG Quick Start</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <main class="shell">
-      <header class="hero">
-        <div>
-          <p class="eyebrow">Local RAG</p>
-          <h1>Quick Start</h1>
-          <p class="subtitle">Start the stack, upload a document, and ask your first question.</p>
-        </div>
-        <a class="primary-link" href="http://localhost:8502">Open App</a>
-      </header>
 
-      <section class="summary">
-        <div>
-          <span>Need</span>
-          <strong>Docker + Ollama</strong>
-        </div>
-        <div>
-          <span>Model</span>
-          <strong>llama3.2:3b</strong>
-        </div>
-        <div>
-          <span>App</span>
-          <strong>localhost:8502</strong>
-        </div>
-      </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local RAG Quick Start</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
 
-      <section class="steps" aria-label="Setup steps">
-        <article class="step-card">
-          <span class="step-number">1</span>
-          <div>
-            <h2>Install the basics</h2>
-            <p>Make sure Docker Desktop and Ollama are running.</p>
-            <pre><code>ollama pull llama3.2:3b</code></pre>
-          </div>
-        </article>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Local RAG</p>
+        <h1>Quick Start</h1>
+        <p class="subtitle">Start the stack, upload a document, and ask your first question.</p>
+      </div>
+      <a class="primary-link" href="http://localhost:8502">Open App</a>
+    </header>
 
-        <article class="step-card">
-          <span class="step-number">2</span>
-          <div>
-            <h2>Start the app</h2>
-            <p>Use a repo-relative path (not a machine-specific username path):</p>
-            <pre><code>git clone &lt;your-repo-url&gt;
+    <section class="summary">
+      <div>
+        <span>Need</span>
+        <strong>Docker + Ollama</strong>
+      </div>
+      <div>
+        <span>Model</span>
+        <strong>llama3.2:3b</strong>
+      </div>
+      <div>
+        <span>App</span>
+        <strong>localhost:8502</strong>
+      </div>
+    </section>
+
+    <section class="steps" aria-label="Setup steps">
+      <article class="step-card">
+        <span class="step-number">1</span>
+        <div>
+          <h2>Install the basics</h2>
+          <p>Make sure Docker Desktop and Ollama are running.</p>
+          <pre><code>ollama pull llama3.2:3b</code></pre>
+        </div>
+      </article>
+
+      <article class="step-card">
+        <span class="step-number">2</span>
+        <div>
+          <h2>Start the app</h2>
+          <p>Use a repo-relative path (not a machine-specific username path):</p>
+          <pre><code>git clone &lt;your-repo-url&gt;
 cd rag_documents
 docker compose up -d --build</code></pre>
-            <p>If you publish prebuilt images, users can skip local builds:</p>
-            <pre><code>docker compose pull
+          <p>If you publish prebuilt images, users can skip local builds:</p>
+          <pre><code>docker compose pull
 docker compose up -d</code></pre>
-          </div>
-        </article>
+        </div>
+      </article>
 
-        <article class="step-card">
-          <span class="step-number">3</span>
-          <div>
-            <h2>Open the tools</h2>
-            <div class="service-grid">
-              <a href="http://localhost:8502">
-                <span>Frontend</span>
-                <strong>localhost:8502</strong>
-              </a>
-              <a href="http://localhost:8001/health">
-                <span>Backend health</span>
-                <strong>localhost:8001/health</strong>
-              </a>
-              <a href="http://localhost:6335/dashboard">
-                <span>Qdrant</span>
-                <strong>localhost:6335/dashboard</strong>
-              </a>
-            </div>
+      <article class="step-card">
+        <span class="step-number">3</span>
+        <div>
+          <h2>Open the tools</h2>
+          <div class="service-grid">
+            <a href="http://localhost:8502">
+              <span>Frontend</span>
+              <strong>localhost:8502</strong>
+            </a>
+            <a href="http://localhost:8001/health">
+              <span>Backend health</span>
+              <strong>localhost:8001/health</strong>
+            </a>
+            <a href="http://localhost:6335/dashboard">
+              <span>Qdrant</span>
+              <strong>localhost:6335/dashboard</strong>
+            </a>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <article class="step-card">
-          <span class="step-number">4</span>
-          <div>
-            <h2>Use it</h2>
-            <ol>
-              <li>Upload a PDF, CSV, spreadsheet, or text file.</li>
-              <li>Click <strong>Process &amp; Index</strong>.</li>
-              <li>Ask a question about the file.</li>
-            </ol>
-          </div>
-        </article>
-      </section>
+      <article class="step-card">
+        <span class="step-number">4</span>
+        <div>
+          <h2>Use it</h2>
+          <ol>
+            <li>Upload a PDF, CSV, spreadsheet, or text file.</li>
+            <li>Click <strong>Process &amp; Index</strong>.</li>
+            <li>Ask a question about the file.</li>
+          </ol>
+        </div>
+      </article>
+    </section>
 
-      <section class="help-panel">
-        <h2>Quick fixes</h2>
-        <ul class="fix-list">
-          <li><span>No model answer</span><code>ollama serve</code></li>
-          <li><span>Page looks stale</span><code>Cmd + Shift + R</code></li>
-          <li><span>Reset everything</span><code>docker compose down -v</code></li>
-          <li><span>Check backend logs</span><code>docker logs doc_backend</code></li>
-        </ul>
-      </section>
-    </main>
-  </body>
+    <section class="help-panel">
+      <h2>Quick fixes</h2>
+      <ul class="fix-list">
+        <li><span>No model answer</span><code>ollama serve</code></li>
+        <li><span>Page looks stale</span><code>Cmd + Shift + R</code></li>
+        <li><span>Reset everything</span><code>docker compose down -v</code></li>
+        <li><span>Check backend logs</span><code>docker logs doc_backend</code></li>
+      </ul>
+    </section>
+  </main>
+</body>
+
 </html>

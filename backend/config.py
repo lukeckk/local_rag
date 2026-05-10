@@ -17,6 +17,3 @@ CHUNK_OVERLAP = 64
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "localhost")
 OLLAMA_PORT = int(os.getenv("OLLAMA_PORT", 11434))
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2:3b")
-
-# Data
-RAW_MARKDOWN_DIR = os.getenv("RAW_MARKDOWN_DIR", "../data/raw_markdown")

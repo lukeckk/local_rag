@@ -283,11 +283,11 @@ with st.sidebar:
     st.divider()
     st.markdown("**Stack**")
     st.markdown(
-        "- 🔍 Qdrant (vector DB)\n"
-        "- 🤗 all-MiniLM-L6-v2 (embeddings)\n"
-        "- 🦙 local LLM via Ollama\n"
-        "- ⚡ FastAPI backend\n"
-        "- 🔒 100% local — PDPA compliant"
+        "- Qdrant (vector DB)\n"
+        "- all-MiniLM-L6-v2 (embeddings)\n"
+        "- local LLM via Ollama\n"
+        "- FastAPI backend\n"
+        "- 100% local — PDPA compliant"
     )
 
 # ---------------------------------------------------------------------------
