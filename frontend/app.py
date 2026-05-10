@@ -120,6 +120,22 @@ st.markdown(
     """
     <style>
     [data-testid="stAppDeployButton"] {display: none;}
+    [data-testid="stHeader"] {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        min-height: 4rem;
+    }
+    [data-testid="stHeader"]::before {
+        content: "📄 LOCAL RAG";
+        position: absolute;
+        left: 1rem;
+        top: 0.55rem;
+        font-size: 2.05rem;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        pointer-events: none;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -128,12 +144,10 @@ st.markdown(
 # ---------------------------------------------------------------------------
 # Header
 # ---------------------------------------------------------------------------
-st.title("📄 LOCAL RAG")
 st.caption(
     "Upload your documents (PDF, CSV, Excel, TXT) and ask questions about them. "
     "All processing and indexing is done locally."
 )
-st.divider()
 
 # ---------------------------------------------------------------------------
 # Session state
