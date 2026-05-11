@@ -13,34 +13,30 @@
     <header class="hero">
       <div>
         <p class="eyebrow">Local RAG</p>
-        <h1>Quick Start</h1>
-        <p class="subtitle">Start the stack, upload a document, and ask your first question.</p>
+        <h1>Full Privacy AI Chat for Your Documents</h1>
+        <p class="subtitle">
+          100% local, free to run, and usable without external AI APIs.
+          Your files stay on your machine.
+        </p>
       </div>
-      <a class="primary-link" href="http://localhost:8502">Open App</a>
+      <div class="hero-actions">
+        <a class="github-link" href="https://github.com/lukeckk/local_rag" target="_blank" rel="noopener noreferrer">🐙
+          GitHub</a>
+        <a class="primary-link" href="http://localhost:8502">Open App</a>
+      </div>
     </header>
-
-    <section class="summary">
-      <div>
-        <span>Need</span>
-        <strong>Docker + Ollama</strong>
-      </div>
-      <div>
-        <span>Model</span>
-        <strong>llama3.2:3b</strong>
-      </div>
-      <div>
-        <span>App</span>
-        <strong>localhost:8502</strong>
-      </div>
-    </section>
 
     <section class="steps" aria-label="Setup steps">
       <article class="step-card">
         <span class="step-number">1</span>
         <div>
           <h2>Install the basics</h2>
-          <p>Make sure Docker Desktop and Ollama are running.</p>
-          <pre><code>ollama pull llama3.2:3b</code></pre>
+          <p>Install Docker Desktop and Ollama first, then make sure both are running.</p>
+          <pre><code># Install Docker Desktop:
+# https://www.docker.com/products/docker-desktop/
+
+# Install Ollama:
+# https://ollama.com/download</code></pre>
         </div>
       </article>
 
@@ -48,13 +44,11 @@
         <span class="step-number">2</span>
         <div>
           <h2>Start the app</h2>
-          <p>Use a repo-relative path (not a machine-specific username path):</p>
-            <pre><code>git clone https://github.com/lukeckk/local_rag.git
+          <p>Clone the repository and run the app from the project folder:</p>
+          <pre><code>git clone https://github.com/lukeckk/local_rag.git
 cd rag_documents
+ollama pull llama3.2:3b
 docker compose up -d --build</code></pre>
-          <p>If you publish prebuilt images, users can skip local builds:</p>
-          <pre><code>docker compose pull
-docker compose up -d</code></pre>
         </div>
       </article>
 
